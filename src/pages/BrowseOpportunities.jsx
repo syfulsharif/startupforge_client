@@ -62,7 +62,7 @@ export const BrowseOpportunities = () => {
   }, [page, searchTerm, selectedIndustry, selectedWorkType, selectedCommitment, sortBy]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-150 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern">
+    <div className="min-h-screen bg-transparent text-slate-850 dark:text-slate-150 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Segment */}
@@ -72,16 +72,16 @@ export const BrowseOpportunities = () => {
               <Sparkles size={12} />
               <span>{totalCount} active positions match search criteria</span>
             </div>
-            <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-white">
+            <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
               Browse Open Opportunities
             </h1>
-            <p className="text-xs text-slate-400 mt-2 max-w-xl">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 max-w-xl">
               Apply to join early stages with active equity allocations, contract terms, or hybrid options. Find your niche, submit a direct pitch, and co-found.
             </p>
           </div>
 
           {/* Grid/List toggle */}
-          <div className="flex items-center gap-3 bg-slate-900/45 border border-white/5 p-1.5 rounded-lg backdrop-blur-md shadow-sm">
+          <div className="flex items-center gap-3 bg-white/45 dark:bg-slate-900/45 border border-slate-200 dark:border-white/5 p-1.5 rounded-lg backdrop-blur-md shadow-sm">
             <button 
               onClick={() => setIsGridView(true)}
               className={`p-1.5 rounded transition ${isGridView ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white'}`}
@@ -111,7 +111,7 @@ export const BrowseOpportunities = () => {
                 placeholder="Search roles (e.g. Lead, Frontend, Figma, Rust...)"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-slate-950/45 border border-white/5 text-slate-200 text-xs py-2.5 pl-10 pr-4 rounded-lg focus:outline-none focus:border-indigo-500/50 backdrop-blur-md"
+                className="w-full bg-white/45 dark:bg-slate-950/45 border border-slate-200 dark:border-white/5 text-slate-800 dark:text-slate-200 text-xs py-2.5 pl-10 pr-4 rounded-lg focus:outline-none focus:border-indigo-500/50 backdrop-blur-md"
               />
             </div>
 
@@ -120,31 +120,31 @@ export const BrowseOpportunities = () => {
               <select
                 value={selectedIndustry}
                 onChange={(e) => setSelectedIndustry(e.target.value)}
-                className="w-full bg-slate-950/45 border border-white/5 text-slate-300 text-xs py-2.5 px-3 rounded-lg focus:outline-none focus:border-indigo-500/50 backdrop-blur-md"
+                className="w-full bg-white/45 dark:bg-slate-950/45 border border-slate-200 dark:border-white/5 text-slate-700 dark:text-slate-300 text-xs py-2.5 px-3 rounded-lg focus:outline-none focus:border-indigo-500/50 backdrop-blur-md"
               >
-                <option value="All" className="bg-slate-950">All Industries</option>
+                <option value="All" className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white">All Industries</option>
                 {industries.filter(i => i !== 'All').map(i => (
-                  <option key={i} value={i} className="bg-slate-950">{i}</option>
+                  <option key={i} value={i} className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white">{i}</option>
                 ))}
               </select>
             </div>
 
             {/* Sort order settings */}
-            <div className="flex items-center gap-2 bg-slate-950/45 border border-white/5 px-3 py-1.5 rounded-lg backdrop-blur-md">
+            <div className="flex items-center gap-2 bg-white/45 dark:bg-slate-950/45 border border-slate-200 dark:border-white/5 px-3 py-1.5 rounded-lg backdrop-blur-md">
               <ArrowDownWideNarrow size={14} className="text-slate-500 shrink-0" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full bg-transparent text-slate-350 text-xs border-0 focus:outline-none cursor-pointer"
+                className="w-full bg-transparent text-slate-650 dark:text-slate-350 text-xs border-0 focus:outline-none cursor-pointer"
               >
-                <option value="newest" className="bg-slate-950">Sort: Newest First</option>
-                <option value="oldest" className="bg-slate-950">Sort: Oldest First</option>
+                <option value="newest" className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white">Sort: Newest First</option>
+                <option value="oldest" className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white">Sort: Oldest First</option>
               </select>
             </div>
           </div>
 
           {/* Auxiliary filter row for workType and commitment */}
-          <div className="flex flex-wrap gap-4 pt-1 border-t border-white/10">
+          <div className="flex flex-wrap gap-4 pt-1 border-t border-slate-200 dark:border-white/10">
             <div className="flex items-center gap-2">
               <span className="text-[10px] uppercase font-mono text-slate-500">Work Mode:</span>
               <div className="flex gap-1.5">
@@ -152,7 +152,7 @@ export const BrowseOpportunities = () => {
                   <button
                     key={wt}
                     onClick={() => setSelectedWorkType(wt)}
-                    className={`px-2.5 py-1 rounded text-[10px] font-semibold border transition ${selectedWorkType === wt ? 'bg-cyan-500/15 text-cyan-400 border-cyan-500/35' : 'bg-slate-950/45 text-slate-400 border-white/5 hover:bg-slate-800/40 backdrop-blur-sm'}`}
+                    className={`px-2.5 py-1 rounded text-[10px] font-semibold border transition ${selectedWorkType === wt ? 'bg-cyan-500/15 text-cyan-400 border-cyan-500/35' : 'bg-white/45 dark:bg-slate-950/45 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-slate-800/40 backdrop-blur-sm'}`}
                   >
                     {wt}
                   </button>
@@ -167,7 +167,7 @@ export const BrowseOpportunities = () => {
                   <button
                     key={ct}
                     onClick={() => setSelectedCommitment(ct)}
-                    className={`px-2.5 py-1 rounded text-[10px] font-semibold border transition ${selectedCommitment === ct ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/35' : 'bg-slate-950/45 text-slate-400 border-white/5 hover:bg-slate-800/40 backdrop-blur-sm'}`}
+                    className={`px-2.5 py-1 rounded text-[10px] font-semibold border transition ${selectedCommitment === ct ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/35' : 'bg-white/45 dark:bg-slate-950/45 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-slate-800/40 backdrop-blur-sm'}`}
                   >
                     {ct}
                   </button>
@@ -186,14 +186,14 @@ export const BrowseOpportunities = () => {
           </div>
         ) : loadedOpportunities.length === 0 ? (
           <div className="glass-card rounded-2xl p-16 text-center max-w-lg mx-auto shadow-xl">
-            <Briefcase className="w-12 h-12 text-slate-755 mx-auto mb-4 text-slate-600" />
-            <p className="font-bold text-white text-base">No Positions Match Criteria</p>
-            <p className="text-xs text-slate-400 mt-2">
+            <Briefcase className="w-12 h-12 text-slate-755 mx-auto mb-4 text-slate-650" />
+            <p className="font-bold text-slate-900 dark:text-white text-base">No Positions Match Criteria</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">
               Try adjusting your query words (e.g. selecting 'All' work modes or commitments) to search the wider list.
             </p>
             <button 
               onClick={() => { setSearchTerm(''); setSelectedIndustry('All'); setSelectedWorkType('All'); setSelectedCommitment('All'); }}
-              className="mt-5 text-xs bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+              className="mt-5 text-xs bg-slate-200 dark:bg-slate-800 hover:bg-slate-350 dark:hover:bg-slate-700 text-slate-700 dark:text-white font-semibold py-2 px-4 rounded-lg transition"
             >
               Reset Search Parameters
             </button>
@@ -214,31 +214,31 @@ export const BrowseOpportunities = () => {
                     <span className="text-[10px] text-slate-500">Deadline: {opp.deadline}</span>
                   </div>
 
-                  <h3 className="font-display font-extrabold text-base text-white mt-4 leading-snug">
+                  <h3 className="font-display font-extrabold text-base text-slate-900 dark:text-white mt-4 leading-snug">
                     {opp.title}
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1 hover:underline">
+                  <p className="text-xs text-slate-650 dark:text-slate-400 mt-1 hover:underline">
                     <Link to={`/startups/${opp.startupId}`}>{opp.startupName}</Link>
                   </p>
 
-                  <p className="text-xs text-slate-400 mt-4 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-650 dark:text-slate-400 mt-4 line-clamp-3 leading-relaxed">
                     {opp.description}
                   </p>
 
                   {/* Skills tags list */}
                   <div className="flex flex-wrap gap-1.5 mt-4">
                     {opp.skills.map((skill, i) => (
-                      <span key={i} className="bg-slate-950 text-slate-400 border border-slate-850 px-2 py-0.5 rounded font-mono text-[9px]">
+                      <span key={i} className="bg-slate-100 dark:bg-slate-950 text-slate-650 dark:text-slate-400 border border-slate-200 dark:border-slate-850 px-2 py-0.5 rounded font-mono text-[9px]">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="border-t border-slate-850 mt-6 pt-4 flex justify-between items-center text-xs">
+                <div className="border-t border-slate-200 dark:border-slate-850 mt-6 pt-4 flex justify-between items-center text-xs">
                   <div>
                     <span className="text-slate-500 block text-[9px] uppercase font-mono">Engagement</span>
-                    <span className="text-slate-200 font-bold">{opp.commitment}</span>
+                    <span className="text-slate-800 dark:text-slate-200 font-bold">{opp.commitment}</span>
                   </div>
                   <Link 
                     to={`/opportunities/${opp.id}`}
@@ -260,7 +260,7 @@ export const BrowseOpportunities = () => {
               >
                 <div className="space-y-1.5">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-display font-bold text-base text-white">
+                    <h3 className="font-display font-bold text-base text-slate-900 dark:text-white">
                       <Link to={`/opportunities/${opp.id}`} className="hover:text-primary transition-colors">{opp.title}</Link>
                     </h3>
                     <span className="bg-cyan-950/40 text-cyan-400 text-[9px] font-bold py-0.5 px-1.5 rounded font-mono border border-cyan-800/20">
@@ -271,22 +271,22 @@ export const BrowseOpportunities = () => {
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-400">
-                    Proposed by <span className="text-slate-350 hover:underline"><Link to={`/startups/${opp.startupId}`}>{opp.startupName}</Link></span>
+                  <p className="text-xs text-slate-650 dark:text-slate-400">
+                    Proposed by <span className="text-slate-800 dark:text-slate-350 hover:underline"><Link to={`/startups/${opp.startupId}`}>{opp.startupName}</Link></span>
                   </p>
 
                   <div className="flex flex-wrap gap-1 mt-1">
                     {opp.skills.map((skill, i) => (
-                      <span key={i} className="bg-slate-950 text-slate-400 px-2 py-0.5 rounded font-mono text-[9px]">
+                      <span key={i} className="bg-slate-100 dark:bg-slate-950 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded font-mono text-[9px]">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 self-stretch sm:self-auto justify-between sm:justify-start pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800">
+                <div className="flex items-center gap-4 self-stretch sm:self-auto justify-between sm:justify-start pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200 dark:border-slate-800">
                   <div className="text-left sm:text-right">
-                    {opp.salaryRange && <p className="text-xs font-mono text-slate-200">{opp.salaryRange}</p>}
+                    {opp.salaryRange && <p className="text-xs font-mono text-slate-800 dark:text-slate-200">{opp.salaryRange}</p>}
                     <p className="text-[10px] text-slate-500 mt-0.5">Deadline: {opp.deadline}</p>
                   </div>
                   <Link 
@@ -307,7 +307,7 @@ export const BrowseOpportunities = () => {
             <button 
               disabled={page === 1}
               onClick={() => setPage(p => Math.max(1, p - 1))}
-              className="px-3 py-1 bg-slate-900 border border-slate-850 rounded text-slate-300 disabled:text-slate-600 text-xs hover:bg-slate-800 transition disabled:hover:bg-slate-900 cursor-pointer"
+              className="px-3 py-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-700 dark:text-slate-300 disabled:text-slate-400 dark:disabled:text-slate-600 text-xs hover:bg-slate-200 dark:hover:bg-slate-800 transition disabled:hover:bg-slate-100 dark:disabled:hover:bg-slate-900 cursor-pointer"
             >
               Prev
             </button>
@@ -315,7 +315,7 @@ export const BrowseOpportunities = () => {
               <button
                 key={idx}
                 onClick={() => setPage(idx + 1)}
-                className={`px-3 py-1 rounded text-xs font-bold transition cursor-pointer ${page === idx + 1 ? 'bg-primary text-white border border-primary' : 'bg-slate-900 text-slate-300 border border-slate-850 hover:bg-slate-800'}`}
+                className={`px-3 py-1 rounded text-xs font-bold transition cursor-pointer ${page === idx + 1 ? 'bg-primary text-white border border-primary' : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800'}`}
               >
                 {idx + 1}
               </button>
@@ -323,7 +323,7 @@ export const BrowseOpportunities = () => {
             <button 
               disabled={page === totalPages}
               onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-              className="px-3 py-1 bg-slate-900 border border-slate-850 rounded text-slate-300 disabled:text-slate-600 text-xs hover:bg-slate-800 transition disabled:hover:bg-slate-900 cursor-pointer"
+              className="px-3 py-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-700 dark:text-slate-300 disabled:text-slate-400 dark:disabled:text-slate-600 text-xs hover:bg-slate-200 dark:hover:bg-slate-800 transition disabled:hover:bg-slate-100 dark:disabled:hover:bg-slate-900 cursor-pointer"
             >
               Next
             </button>

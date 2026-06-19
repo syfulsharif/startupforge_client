@@ -57,17 +57,17 @@ export const Navbar = () => {
       {
     /* Top Demo Utility Switcher Bar */
   }
-      <div className="bg-slate-900 border-b border-white/[0.06] text-xxs py-1.5 px-4 text-slate-400 flex flex-wrap justify-between items-center gap-2 relative z-50">
+      <div className="bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-white/[0.06] text-xxs py-1.5 px-4 text-slate-600 dark:text-slate-400 flex flex-wrap justify-between items-center gap-2 relative z-50">
         <div className="flex items-center gap-1">
           <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
           <span><strong>Interactive Demo Sandbox:</strong> Toggle users below to change dashboard layouts!</span>
         </div>
         <div className="flex items-center gap-2">
-          <span>Active Role: <strong className="text-white uppercase font-mono">{currentUser ? currentUser.role : "Guest"}</strong></span>
+          <span>Active Role: <strong className="text-slate-800 dark:text-white uppercase font-mono">{currentUser ? currentUser.role : "Guest"}</strong></span>
           <div className="relative">
             <button
     onClick={() => setShowImpersonateDrop(!showImpersonateDrop)}
-    className="bg-slate-800 text-slate-200 hover:bg-slate-700/80 rounded px-2 py-0.5 text-xs transition duration-150 flex items-center gap-1 border border-slate-700 font-mono"
+    className="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700/80 rounded px-2 py-0.5 text-xs transition duration-150 flex items-center gap-1 border border-slate-300 dark:border-slate-700 font-mono"
   >
               <UserCheck size={12} />
               Switch Profile
@@ -79,25 +79,25 @@ export const Navbar = () => {
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: 10 }}
-    className="absolute right-0 mt-1 w-64 bg-slate-800 border border-slate-700 rounded-lg shadow-xl py-2 z-50 text-slate-300 font-sans"
+    className="absolute right-0 mt-1 w-64 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl py-2 z-50 text-slate-700 dark:text-slate-300 font-sans"
   >
-                    <div className="px-3 py-1.5 border-b border-slate-700 text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                    <div className="px-3 py-1.5 border-b border-slate-200 dark:border-slate-700 text-slate-505 dark:text-slate-450 text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
                       Select Actor Profile
                     </div>
                     {usersList.map((u) => <button
     key={u.id}
     onClick={() => handleImpersonate(u.id)}
-    className={`w-full text-left px-3 py-2 text-xs flex items-center gap-3 transition-colors hover:bg-slate-700/60 ${currentUser?.id === u.id ? "bg-slate-700/40 text-white font-medium border-l-2 border-indigo-500" : ""}`}
+    className={`w-full text-left px-3 py-2 text-xs flex items-center gap-3 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700/60 ${currentUser?.id === u.id ? "bg-slate-100 dark:bg-slate-700/40 text-slate-900 dark:text-white font-medium border-l-2 border-indigo-500" : ""}`}
   >
                         <img
     src={u.avatar}
     alt={u.name}
-    className="w-7 h-7 rounded-full object-cover border border-slate-600"
+    className="w-7 h-7 rounded-full object-cover border border-slate-200 dark:border-slate-600"
     referrerPolicy="no-referrer"
   />
                         <div className="flex-1 min-w-0">
-                          <p className="truncate font-semibold text-slate-100">{u.name}</p>
-                          <p className="text-[10px] text-slate-400 capitalize">{u.role} {u.isPremium ? "\u2605 Premium" : ""}</p>
+                           <p className="truncate font-semibold text-slate-800 dark:text-slate-100">{u.name}</p>
+                           <p className="text-[10px] text-slate-500 dark:text-slate-400 capitalize">{u.role} {u.isPremium ? "★ Premium" : ""}</p>
                         </div>
                       </button>)}
                     <button
@@ -105,7 +105,7 @@ export const Navbar = () => {
       setCurrentUser(null);
       setShowImpersonateDrop(false);
     }}
-    className="w-full text-left px-3 py-2 text-xs text-rose-400 hover:bg-rose-500/10 flex items-center gap-3 transition-colors border-t border-slate-750"
+    className="w-full text-left px-3 py-2 text-xs text-rose-500 dark:text-rose-450 hover:bg-rose-500/10 flex items-center gap-3 transition-colors border-t border-slate-200 dark:border-slate-700"
   >
                       <LogOut size={14} className="ml-1" />
                       Guest / Logged Out

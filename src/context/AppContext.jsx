@@ -662,10 +662,10 @@ export const AppProvider = ({ children }) => {
             key={t.id}
             className={`pointer-events-auto p-4 rounded-xl shadow-xl flex items-center gap-3 border text-xs font-semibold font-sans animate-bounce-short ${
               t.type === 'success' 
-                ? 'bg-emerald-950/90 border-emerald-500/30 text-emerald-300' 
+                ? 'bg-emerald-50 dark:bg-emerald-950/90 border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300' 
                 : t.type === 'error'
-                ? 'bg-rose-955/90 bg-rose-950 border-rose-500/30 text-rose-300'
-                : 'bg-slate-900 border-indigo-500/30 text-indigo-300'
+                ? 'bg-rose-50 dark:bg-rose-950 border-rose-200 dark:border-rose-500/30 text-rose-800 dark:text-rose-300'
+                : 'bg-indigo-50 dark:bg-slate-900 border-indigo-200 dark:border-indigo-500/30 text-indigo-800 dark:text-indigo-300'
             }`}
           >
             <div className={`w-2 h-2 rounded-full ${

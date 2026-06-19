@@ -22,10 +22,10 @@ export const OpportunityDetails = () => {
   const [customSkills, setCustomSkills] = useState("");
   const [successApply, setSuccessApply] = useState(false);
   if (!openOpp || !startup) {
-    return <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center items-center py-20">
+    return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20">
         <ShieldAlert className="w-16 h-16 text-rose-500 mb-4 animate-bounce" />
         <h2 className="font-display font-bold text-2xl">Role Not Found</h2>
-        <p className="text-xs text-slate-400 mt-2">The open position might be filled or has expired.</p>
+        <p className="text-xs text-slate-650 dark:text-slate-400 mt-2">The open position might be filled or has expired.</p>
         <Link to="/opportunities" className="mt-6 bg-primary text-white py-2 px-4 rounded text-xs">Back to List</Link>
       </div>;
   }
@@ -47,7 +47,7 @@ export const OpportunityDetails = () => {
     setPortfolio("");
     setCustomSkills("");
   };
-  return <div className="min-h-screen bg-slate-950 text-slate-200 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern relative">
+  return <div className="min-h-screen bg-transparent text-slate-800 dark:text-slate-200 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern relative">
       
       <div className="max-w-4xl mx-auto">
         
@@ -56,7 +56,7 @@ export const OpportunityDetails = () => {
   }
         <button
     onClick={() => navigate(-1)}
-    className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white mb-8 group cursor-pointer"
+    className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white mb-8 group cursor-pointer"
   >
           <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
           <span>Back to browser feed</span>
@@ -65,47 +65,47 @@ export const OpportunityDetails = () => {
         {
     /* Dynamic header cards */
   }
-        <div className="bg-slate-900 border border-slate-800/80 rounded-2xl p-6 sm:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b border-slate-800">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 sm:p-8 mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
             <div>
               <span className="text-[10px] bg-cyan-950 text-cyan-400 border border-cyan-800/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider font-mono">
                 {openOpp.workType} Mode
               </span>
-              <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-white mt-3 leading-tight">
+              <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-3 leading-tight">
                 {openOpp.title}
               </h1>
               
-              <p className="text-sm text-slate-300 mt-1">
+              <p className="text-sm text-slate-700 dark:text-slate-300 mt-1">
                 Startup Proposal: <Link to={`/startups/${startup.id}`} className="text-secondary hover:underline font-semibold">{openOpp.startupName}</Link>
               </p>
             </div>
 
             <div className="text-left sm:text-right text-xs">
               <span className="text-slate-500 block uppercase font-mono text-[9px]">Compensation Range</span>
-              <span className="text-emerald-400 font-mono font-bold text-sm sm:text-base tracking-tight block mt-0.5">
+              <span className="text-emerald-555 text-emerald-600 dark:text-emerald-400 font-mono font-bold text-sm sm:text-base tracking-tight block mt-0.5">
                 {openOpp.salaryRange || "Equity Allocation Offered"}
               </span>
               <span className="text-slate-500 block uppercase font-mono text-[9px] mt-2">Position Recruiter</span>
-              <span className="text-slate-300 font-semibold">{startup.founderName}</span>
+              <span className="text-slate-850 dark:text-slate-300 font-semibold">{startup.founderName}</span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-xs">
-            <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-850">
-              <span className="text-slate-505 uppercase text-[9px] font-mono block mb-1">Engagement</span>
-              <span className="text-white font-bold">{openOpp.commitment}</span>
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-200 dark:border-slate-850">
+              <span className="text-slate-500 uppercase text-[9px] font-mono block mb-1">Engagement</span>
+              <span className="text-slate-900 dark:text-white font-bold">{openOpp.commitment}</span>
             </div>
-            <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-850">
-              <span className="text-slate-505 uppercase text-[9px] font-mono block mb-1">Response Speed</span>
-              <span className="text-indigo-400 font-bold">2-3 days average</span>
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-200 dark:border-slate-850">
+              <span className="text-slate-500 uppercase text-[9px] font-mono block mb-1">Response Speed</span>
+              <span className="text-indigo-600 dark:text-indigo-400 font-bold">2-3 days average</span>
             </div>
-            <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-850">
-              <span className="text-slate-505 uppercase text-[9px] font-mono block mb-1">Team Size Needed</span>
-              <span className="text-white font-bold">{startup.teamSizeNeeded} collaborators</span>
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-200 dark:border-slate-850">
+              <span className="text-slate-500 uppercase text-[9px] font-mono block mb-1">Team Size Needed</span>
+              <span className="text-slate-900 dark:text-white font-bold">{startup.teamSizeNeeded} collaborators</span>
             </div>
-            <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-850">
-              <span className="text-slate-505 uppercase text-[9px] font-mono block mb-1">Application Deadline</span>
-              <span className="text-rose-450 text-rose-400 font-bold">{openOpp.deadline}</span>
+            <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-200 dark:border-slate-850">
+              <span className="text-slate-500 uppercase text-[9px] font-mono block mb-1">Application Deadline</span>
+              <span className="text-rose-600 dark:text-rose-400 font-bold">{openOpp.deadline}</span>
             </div>
           </div>
         </div>
@@ -120,9 +120,9 @@ export const OpportunityDetails = () => {
             {
     /* About the Position Description */
   }
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-              <h2 className="font-display font-semibold text-white text-base mb-4 pb-2 border-b border-slate-800">Job Description & Scope</h2>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-line">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+              <h2 className="font-display font-semibold text-slate-900 dark:text-white text-base mb-4 pb-2 border-b border-slate-200 dark:border-slate-800">Job Description & Scope</h2>
+              <p className="text-xs text-slate-650 dark:text-slate-300 leading-relaxed font-sans whitespace-pre-line">
                 {openOpp.description}
               </p>
             </div>
@@ -130,12 +130,12 @@ export const OpportunityDetails = () => {
             {
     /* Required Skills Checkboxes */
   }
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-              <h2 className="font-display font-semibold text-white text-base mb-4 pb-2 border-b border-slate-800">Required Skills Profile</h2>
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+              <h2 className="font-display font-semibold text-slate-900 dark:text-white text-base mb-4 pb-2 border-b border-slate-200 dark:border-slate-800">Required Skills Profile</h2>
               <div className="flex flex-wrap gap-2">
                 {openOpp.skills.map((skill, index) => <span
     key={index}
-    className="bg-slate-950 text-slate-300 font-mono text-xs py-1 px-3 rounded-full border border-slate-850"
+    className="bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 font-mono text-xs py-1 px-3 rounded-full border border-slate-200 dark:border-slate-850"
   >
                     {skill}
                   </span>)}
@@ -149,12 +149,12 @@ export const OpportunityDetails = () => {
   }
           <div className="space-y-6">
             
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-              <h2 className="font-display font-semibold text-white text-sm uppercase tracking-wider mb-3 text-slate-400">Position Status</h2>
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+              <h2 className="font-display font-semibold text-slate-550 dark:text-slate-400 text-sm uppercase tracking-wider mb-3">Position Status</h2>
               
               <div className="flex items-center gap-2 mb-6">
-                <Clock size={16} className="text-cyan-400" />
-                <span className="text-xs text-slate-350">Ad-hoc recruitment open. Applications evaluated daily.</span>
+                <Clock size={16} className="text-cyan-555 text-cyan-600 dark:text-cyan-400 animate-pulse" />
+                <span className="text-xs text-slate-650 dark:text-slate-350">Ad-hoc recruitment open. Applications evaluated daily.</span>
               </div>
 
               {!currentUser ? <div>
@@ -178,12 +178,12 @@ export const OpportunityDetails = () => {
             {
     /* Quick Pitch card details */
   }
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 text-left text-xs">
-              <p className="font-bold text-white mb-2">Company Pitch</p>
-              <p className="text-slate-400 text-xxs line-clamp-4 leading-relaxed">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 text-left text-xs">
+              <p className="font-bold text-slate-900 dark:text-white mb-2">Company Pitch</p>
+              <p className="text-slate-650 dark:text-slate-400 text-xxs line-clamp-4 leading-relaxed">
                 {startup.pitch}
               </p>
-              <Link to={`/startups/${startup.id}`} className="text-indigo-400 hover:underline text-xxs font-bold mt-2.5 block">
+              <Link to={`/startups/${startup.id}`} className="text-indigo-600 dark:text-indigo-400 hover:underline text-xxs font-bold mt-2.5 block">
                 View detailed Pitch slide &gt;
               </Link>
             </div>
@@ -198,7 +198,7 @@ export const OpportunityDetails = () => {
     /* Dynamic Overlay / slide popup modal for application placement */
   }
       {showApplyModal && <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex justify-center items-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
             
             {
     /* Close Toggle */
@@ -208,7 +208,7 @@ export const OpportunityDetails = () => {
       setShowApplyModal(false);
       setSuccessApply(false);
     }}
-    className="absolute top-4 right-4 text-slate-400 hover:text-white"
+    className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 dark:hover:text-white"
   >
               ✕
             </button>
@@ -216,10 +216,10 @@ export const OpportunityDetails = () => {
             {!successApply ? <form onSubmit={handleApplySubmit} className="space-y-5 text-xs">
                 
                 <div className="flex items-center gap-2 mb-1">
-                  <Sparkles size={16} className="text-cyan-400" />
-                  <h2 className="font-display font-bold text-lg text-white">Apply to {openOpp.title}</h2>
+                  <Sparkles size={16} className="text-cyan-555 text-cyan-600 dark:text-cyan-400" />
+                  <h2 className="font-display font-bold text-lg text-slate-900 dark:text-white">Apply to {openOpp.title}</h2>
                 </div>
-                <p className="text-slate-400 text-xxs">
+                <p className="text-slate-600 dark:text-slate-400 text-xxs">
                   Your current account, <strong>{currentUser?.name}</strong> ({currentUser?.email}), will be linked as the primary candidate.
                 </p>
 
@@ -227,14 +227,14 @@ export const OpportunityDetails = () => {
     /* Cover letter Cover pitch */
   }
                 <div className="space-y-1">
-                  <label className="text-slate-350 block font-semibold">Your Cover Pitch *</label>
+                  <label className="text-slate-700 dark:text-slate-350 block font-semibold">Your Cover Pitch *</label>
                   <textarea
     required
     rows={4}
     value={pitch}
     onChange={(e) => setPitch(e.target.value)}
     placeholder="Briefly state your exit history, software skill strengths and why you are interested in voluntary equity positions for this Greentech/AI vision..."
-    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 outline-none focus:border-indigo-500 font-sans"
+    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 text-slate-900 dark:text-slate-200 outline-none focus:border-indigo-500 font-sans"
   />
                 </div>
 
@@ -242,7 +242,7 @@ export const OpportunityDetails = () => {
     /* Portfolio URL linkouts */
   }
                 <div className="space-y-1">
-                  <label className="text-slate-350 block font-semibold flex items-center gap-1">
+                  <label className="text-slate-700 dark:text-slate-350 block font-semibold flex items-center gap-1">
                     <Link2 size={13} className="text-slate-500" /> Portfolio Website / GitHub Link
                   </label>
                   <input
@@ -250,7 +250,7 @@ export const OpportunityDetails = () => {
     value={portfolio}
     onChange={(e) => setPortfolio(e.target.value)}
     placeholder="https://marcuschen.dev"
-    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 outline-none focus:border-indigo-500 font-mono"
+    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 text-slate-900 dark:text-slate-200 outline-none focus:border-indigo-500 font-mono"
   />
                 </div>
 
@@ -258,13 +258,13 @@ export const OpportunityDetails = () => {
     /* Skills custom entry */
   }
                 <div className="space-y-1">
-                  <label className="text-slate-350 block font-semibold">Explicit Tool Stack (comma separated or leave blank for profile default)</label>
+                  <label className="text-slate-700 dark:text-slate-350 block font-semibold">Explicit Tool Stack (comma separated or leave blank for profile default)</label>
                   <input
     type="text"
     value={customSkills}
     onChange={(e) => setCustomSkills(e.target.value)}
     placeholder="React, TypeScript, Redux, Docker, WASM"
-    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 outline-none focus:border-indigo-500 font-mono"
+    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 text-slate-900 dark:text-slate-200 outline-none focus:border-indigo-500 font-mono"
   />
                 </div>
 
@@ -272,7 +272,7 @@ export const OpportunityDetails = () => {
                   <button
     type="button"
     onClick={() => setShowApplyModal(false)}
-    className="bg-slate-800 hover:bg-slate-750 text-slate-300 py-2 px-4 rounded-lg font-semibold"
+    className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-305 hover:bg-slate-300 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 py-2 px-4 rounded-lg font-semibold"
   >
                     Cancel
                   </button>
@@ -289,8 +289,8 @@ export const OpportunityDetails = () => {
                 <div className="w-12 h-12 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto">
                   <CheckCircle size={24} />
                 </div>
-                <h3 className="font-display font-bold text-lg text-white">Application Placed Successfully!</h3>
-                <p className="text-slate-400 text-xs leading-relaxed max-w-sm mx-auto">
+                <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white">Application Placed Successfully!</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed max-w-sm mx-auto">
                   Your cover letter and profile CV have been logged on <strong>{startup.name}</strong>'s applicant management dashboard backlog. The founder will review and confirm.
                 </p>
 
@@ -298,7 +298,7 @@ export const OpportunityDetails = () => {
                   <Link
     to="/dashboard"
     onClick={() => setShowApplyModal(false)}
-    className="bg-slate-800 hover:bg-slate-750 text-white text-xs py-2 px-4 rounded-lg font-semibold block text-center"
+    className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-750 text-slate-800 dark:text-white text-xs py-2 px-4 rounded-lg font-semibold block text-center"
   >
                     Monitor Status on Dashboard &gt;
                   </Link>

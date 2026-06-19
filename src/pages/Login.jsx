@@ -56,9 +56,9 @@ export const Login = () => {
       setErrorMessage("Failed to login as preset profile. Make sure the backend server has seeded database entries.");
     }
   };
-  return <div className="min-h-[85vh] bg-slate-950 text-slate-200 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern relative">
+  return <div className="min-h-[85vh] bg-transparent text-slate-800 dark:text-slate-200 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern relative">
       
-      <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+      <div className="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none" />
 
         {
@@ -68,8 +68,8 @@ export const Login = () => {
           <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold mx-auto mb-2">
             <Key size={20} />
           </div>
-          <h2 className="font-display font-extrabold text-white text-xl sm:text-2xl">StartupForge Secure Portal</h2>
-          <p className="text-slate-450 text-[11px] mt-1 text-slate-400">
+          <h2 className="font-display font-extrabold text-slate-900 dark:text-white text-xl sm:text-2xl">StartupForge Secure Portal</h2>
+          <p className="text-slate-600 dark:text-slate-400 text-[11px] mt-1">
             Select an active Sandbox profile or type in credentials to proceed.
           </p>
         </div>
@@ -77,43 +77,43 @@ export const Login = () => {
         {
     /* Demo Fast Login Helper Panel */
   }
-        <div className="bg-slate-950/60 p-4 border border-slate-850 rounded-xl mb-6 space-y-2.5">
+        <div className="bg-slate-50 dark:bg-slate-950/60 p-4 border border-slate-200 dark:border-slate-850 rounded-xl mb-6 space-y-2.5">
           <div className="flex items-center gap-1 text-indigo-400 text-[10px] font-bold uppercase tracking-wider font-mono">
             <Zap size={10} className="text-amber-500 fill-amber-500" />
             <span>Interactive Auto-Login Helpers:</span>
           </div>
-          <p className="text-[10px] text-slate-500 select-none">
+          <p className="text-[10px] text-slate-650 dark:text-slate-500 select-none">
             Skip writing profiles. Click either button below to login with presets or preconfigured rights:
           </p>
           <div className="grid grid-cols-1 gap-2">
             <button
     onClick={() => handleInstantSelection("u-1")}
-    className="w-full text-left bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
+    className="w-full text-left bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-880 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
   >
               <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="Sarah J" className="w-6 h-6 rounded-full object-cover" referrerPolicy="no-referrer" />
               <div className="flex-1">
-                <span className="text-white block font-bold">Sarah Jenkins (Founder / Premium)</span>
-                <span className="text-slate-505 text-slate-400">Manages EcoSphere, hires programmers</span>
+                <span className="text-slate-900 dark:text-white block font-bold">Sarah Jenkins (Founder / Premium)</span>
+                <span className="text-slate-600 dark:text-slate-400">Manages EcoSphere, hires programmers</span>
               </div>
             </button>
             <button
     onClick={() => handleInstantSelection("u-3")}
-    className="w-full text-left bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
+    className="w-full text-left bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
   >
               <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150" alt="Marcus C" className="w-6 h-6 rounded-full object-cover" referrerPolicy="no-referrer" />
               <div className="flex-1">
-                <span className="text-white block font-bold">Marcus Chen (Developer Collaborator)</span>
-                <span className="text-slate-505 text-slate-400">Applies to open tech jobs</span>
+                <span className="text-slate-900 dark:text-white block font-bold">Marcus Chen (Developer Collaborator)</span>
+                <span className="text-slate-600 dark:text-slate-400">Applies to open tech jobs</span>
               </div>
             </button>
             <button
     onClick={() => handleInstantSelection("u-admin")}
-    className="w-full text-left bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
+    className="w-full text-left bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
   >
-              <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-300 border border-slate-700 text-xs text-center font-mono uppercase">AD</span>
+              <span className="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 text-xs text-center font-mono uppercase">AD</span>
               <div className="flex-1">
-                <span className="text-white block font-bold">Platform Moderator (Admin User)</span>
-                <span className="text-slate-505 text-slate-400">Drove transactions, blocked accounts</span>
+                <span className="text-slate-900 dark:text-white block font-bold">Platform Moderator (Admin User)</span>
+                <span className="text-slate-600 dark:text-slate-400">Drove transactions, blocked accounts</span>
               </div>
             </button>
           </div>
@@ -122,7 +122,7 @@ export const Login = () => {
         {
     /* Regular Login Form */
   }
-        <form onSubmit={handleManualLogin} className="space-y-4 text-xs text-slate-350">
+        <form onSubmit={handleManualLogin} className="space-y-4 text-xs text-slate-650 dark:text-slate-350">
           
           {errorMessage && <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-500 rounded-lg text-xxs font-medium flex items-center gap-1.5 leading-relaxed">
               <span className="w-1.5 h-1.5 bg-rose-500 rounded-full shrink-0" />
@@ -133,7 +133,7 @@ export const Login = () => {
     /* Email segment */
   }
           <div className="space-y-1">
-            <label className="text-slate-350 block font-semibold">Email Address</label>
+            <label className="text-slate-700 dark:text-slate-350 block font-semibold">Email Address</label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 text-slate-500 w-4 h-4" />
               <input
@@ -142,7 +142,7 @@ export const Login = () => {
     value={email}
     onChange={(e) => setEmail(e.target.value)}
     placeholder="developer@example.com"
-    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-slate-200 outline-none focus:border-indigo-500 text-xs font-mono"
+    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-slate-900 dark:text-slate-200 outline-none focus:border-indigo-500 text-xs font-mono"
   />
             </div>
           </div>
@@ -152,7 +152,7 @@ export const Login = () => {
   }
           <div className="space-y-1">
             <div className="flex justify-between items-center text-xs">
-              <label className="text-slate-350 font-semibold">Password</label>
+              <label className="text-slate-700 dark:text-slate-350 font-semibold">Password</label>
               <a href="#" className="text-primary hover:underline text-xxs">Forgot password?</a>
             </div>
             <div className="relative">
@@ -163,7 +163,7 @@ export const Login = () => {
     value={password}
     onChange={(e) => setPassword(e.target.value)}
     placeholder="••••••••"
-    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2.5 pl-10 pr-10 text-slate-200 outline-none focus:border-indigo-500 text-xs"
+    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg py-2.5 pl-10 pr-10 text-slate-900 dark:text-slate-200 outline-none focus:border-indigo-500 text-xs"
   />
               <button
     type="button"
@@ -188,9 +188,9 @@ export const Login = () => {
 
         </form>
 
-        <div className="border-t border-slate-800 bg-transparent mt-6 pt-5 flex justify-center text-xxs text-slate-450 gap-1.5 select-none">
+        <div className="border-t border-slate-200 dark:border-slate-800 bg-transparent mt-6 pt-5 flex justify-center text-xxs text-slate-500 dark:text-slate-450 gap-1.5 select-none">
           <span>New to group team building on StartupForge?</span>
-          <Link to="/register" className="text-indigo-400 hover:underline font-semibold">Create account &gt;</Link>
+          <Link to="/register" className="text-indigo-500 dark:text-indigo-400 hover:underline font-semibold">Create account &gt;</Link>
         </div>
 
       </div>
