@@ -35,87 +35,69 @@ export const Login = () => {
       setErrorMessage(res.message || "Credentials rejected. Invalid email or password.");
     }
   };
-  const handleInstantSelection = async (userId) => {
-    setLoading(true);
-    let targetEmail = "";
-    let targetPassword = "password123A"; // Standard seeded password
-
-    if (userId === "u-1") {
-      targetEmail = "sarah@ecosphere.com";
-    } else if (userId === "u-3") {
-      targetEmail = "marcus@dev.io";
-    } else if (userId === "u-admin") {
-      targetEmail = "admin@startupforge.com";
-    }
-
-    const res = await login(targetEmail, targetPassword);
-    setLoading(false);
-    if (res.success) {
-      navigate(from, { replace: true });
-    } else {
-      setErrorMessage("Failed to login as preset profile. Make sure the backend server has seeded database entries.");
-    }
-  };
   return <div className="min-h-[85vh] bg-transparent text-slate-800 dark:text-slate-200 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern relative">
       
       <div className="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none" />
 
         {
-    /* Brand visual header */
-  }
-        <div className="text-center mb-8">
+          /* Brand visual header */
+        }
+        <div className="text-center mb-6">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold mx-auto mb-2">
             <Key size={20} />
           </div>
           <h2 className="font-display font-extrabold text-slate-900 dark:text-white text-xl sm:text-2xl">StartupForge Secure Portal</h2>
           <p className="text-slate-600 dark:text-slate-400 text-[11px] mt-1">
-            Select an active Sandbox profile or type in credentials to proceed.
+            Sign in with your credentials to access the platform.
           </p>
         </div>
 
         {
-    /* Demo Fast Login Helper Panel */
-  }
-        <div className="bg-slate-50 dark:bg-slate-950/60 p-4 border border-slate-200 dark:border-slate-850 rounded-xl mb-6 space-y-2.5">
-          <div className="flex items-center gap-1 text-indigo-400 text-[10px] font-bold uppercase tracking-wider font-mono">
+          /* Demo Sandbox Credentials Panel */
+        }
+        <div className="bg-slate-50 dark:bg-slate-950/60 p-4 border border-slate-200 dark:border-slate-850 rounded-xl mb-6 space-y-3">
+          <div className="flex items-center gap-1.5 text-indigo-400 text-[10px] font-bold uppercase tracking-wider font-mono">
             <Zap size={10} className="text-amber-500 fill-amber-500" />
-            <span>Interactive Auto-Login Helpers:</span>
+            <span>Role-Based Sandbox Credentials</span>
           </div>
-          <p className="text-[10px] text-slate-650 dark:text-slate-500 select-none">
-            Skip writing profiles. Click either button below to login with presets or preconfigured rights:
+          <p className="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed">
+            Click any account below to auto-fill the login fields, then sign in:
           </p>
-          <div className="grid grid-cols-1 gap-2">
-            <button
-    onClick={() => handleInstantSelection("u-1")}
-    className="w-full text-left bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-880 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
-  >
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="Sarah J" className="w-6 h-6 rounded-full object-cover" referrerPolicy="no-referrer" />
-              <div className="flex-1">
-                <span className="text-slate-900 dark:text-white block font-bold">Sarah Jenkins (Founder / Premium)</span>
-                <span className="text-slate-600 dark:text-slate-400">Manages EcoSphere, hires programmers</span>
+          <div className="space-y-2 text-xxs">
+            <div 
+              onClick={() => { setEmail("sarah@ecosphere.com"); setPassword("password123A"); }}
+              className="p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all flex justify-between items-center"
+            >
+              <div>
+                <span className="font-bold text-slate-900 dark:text-white block">Founder Account (Sarah)</span>
+                <span className="font-mono text-slate-500">sarah@ecosphere.com</span>
               </div>
-            </button>
-            <button
-    onClick={() => handleInstantSelection("u-3")}
-    className="w-full text-left bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
-  >
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150" alt="Marcus C" className="w-6 h-6 rounded-full object-cover" referrerPolicy="no-referrer" />
-              <div className="flex-1">
-                <span className="text-slate-900 dark:text-white block font-bold">Marcus Chen (Developer Collaborator)</span>
-                <span className="text-slate-600 dark:text-slate-400">Applies to open tech jobs</span>
+              <span className="bg-indigo-500/10 text-indigo-500 dark:text-indigo-400 px-1.5 py-0.5 rounded font-semibold text-[9px] uppercase">Founder</span>
+            </div>
+            <div 
+              onClick={() => { setEmail("marcus@dev.io"); setPassword("password123A"); }}
+              className="p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all flex justify-between items-center"
+            >
+              <div>
+                <span className="font-bold text-slate-900 dark:text-white block">Collaborator Account (Marcus)</span>
+                <span className="font-mono text-slate-500">marcus@dev.io</span>
               </div>
-            </button>
-            <button
-    onClick={() => handleInstantSelection("u-admin")}
-    className="w-full text-left bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xxs flex items-center gap-2.5 transition active:scale-98"
-  >
-              <span className="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 text-xs text-center font-mono uppercase">AD</span>
-              <div className="flex-1">
-                <span className="text-slate-900 dark:text-white block font-bold">Platform Moderator (Admin User)</span>
-                <span className="text-slate-600 dark:text-slate-400">Drove transactions, blocked accounts</span>
+              <span className="bg-cyan-500/10 text-cyan-500 dark:text-cyan-400 px-1.5 py-0.5 rounded font-semibold text-[9px] uppercase">Collaborator</span>
+            </div>
+            <div 
+              onClick={() => { setEmail("admin@startupforge.com"); setPassword("password123A"); }}
+              className="p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all flex justify-between items-center"
+            >
+              <div>
+                <span className="font-bold text-slate-900 dark:text-white block">Admin Account (Moderator)</span>
+                <span className="font-mono text-slate-500">admin@startupforge.com</span>
               </div>
-            </button>
+              <span className="bg-amber-500/10 text-amber-500 dark:text-amber-400 px-1.5 py-0.5 rounded font-semibold text-[9px] uppercase">Admin</span>
+            </div>
+          </div>
+          <div className="text-[9px] text-slate-500 text-center font-mono border-t border-slate-200/60 dark:border-slate-850 pt-2">
+            Standard Password: <strong className="text-slate-700 dark:text-slate-300 select-all">password123A</strong>
           </div>
         </div>
 

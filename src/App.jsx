@@ -26,16 +26,16 @@ export default function App() {
           <div className="absolute top-[40%] left-[80%] w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[130px] pointer-events-none z-0" />
 
           {
-    /* Navigation Bar */
-  }
-          <div className="relative z-10">
+            /* Navigation Bar */
+          }
+          <div className="relative z-50">
             <Navbar />
           </div>
 
           {
-    /* Core Route Routing */
-  }
-          <main className="flex-grow flex flex-col relative z-100">
+            /* Core Route Routing */
+          }
+          <main className="flex-grow flex flex-col relative z-10">
             <Routes>
               {
     /* Public Routes */
