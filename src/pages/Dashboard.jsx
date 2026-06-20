@@ -73,8 +73,35 @@ export const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
   const [startupName, setStartupName] = useState(myActiveStartup ? myActiveStartup.name : "");
-  const [startupLogo, setStartupLogo] = useState(myActiveStartup ? myActiveStartup.logo : "\u{1F680}");
+  const [startupLogo, setStartupLogo] = useState(myActiveStartup ? myActiveStartup.logo : "🚀");
+  const [logoUploading, setLogoUploading] = useState(false);
   const [startupIndustry, setStartupIndustry] = useState(myActiveStartup ? myActiveStartup.industry : "SaaS");
+
+  const handleLogoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setLogoUploading(true);
+    const formData = new FormData();
+    formData.append("image", file);
+    try {
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      if (data.success) {
+        setStartupLogo(data.data.url);
+        setStartupFormFeedback("Success: Logo uploaded successfully!");
+      } else {
+        setStartupFormFeedback("Error: Logo upload failed.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStartupFormFeedback("Error: Logo upload failed.");
+    } finally {
+      setLogoUploading(false);
+    }
+  };
   const [startupDescription, setStartupDescription] = useState(myActiveStartup ? myActiveStartup.description : "");
   const [startupStage, setStartupStage] = useState(() => {
     return myActiveStartup ? myActiveStartup.fundingStage : "Pre-seed";
@@ -435,15 +462,20 @@ export const Dashboard = () => {
   />
                     </div>
                     <div className="space-y-1">
-                      <label className="font-semibold text-slate-700 dark:text-slate-400">Branding Emoji/Logo *</label>
-                      <input
-    type="text"
-    required
-    value={startupLogo}
-    onChange={(e) => setStartupLogo(e.target.value)}
-    placeholder="e.g. 🌱"
-    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
-  />
+                      <label className="font-semibold text-slate-700 dark:text-slate-400">Branding Logo (Upload Image) *</label>
+                      <div className="flex items-center gap-2">
+                        {startupLogo && startupLogo !== "🚀" && startupLogo.startsWith("http") && (
+                          <img src={startupLogo} alt="Logo" className="w-9 h-9 rounded object-cover" />
+                        )}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleLogoUpload}
+                          disabled={logoUploading}
+                          className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-1.5 text-slate-900 dark:text-white outline-none focus:border-indigo-500 text-xs"
+                        />
+                      </div>
+                      {logoUploading && <p className="text-xs text-indigo-500 mt-1">Uploading...</p>}
                     </div>
                     <div className="space-y-1">
                       <label className="font-semibold text-slate-700 dark:text-slate-400">Industry Theme *</label>
@@ -1010,7 +1042,7 @@ export const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200 dark:divide-slate-850">
-                      {usersList.map((usr) => <tr key={usr.id} className="text-slate-700 dark:text-slate-350 hover:bg-slate-200/50 dark:hover:bg-slate-850/10">
+                      {usersList.map((usr) => <tr key={usr.id} className="text-slate-700 dark:text-slate-350 even:bg-slate-50 dark:even:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                           <td className="py-3.5 pr-2">
                             <div className="flex items-center gap-2">
                               <img src={usr.avatar} alt={usr.name} className="w-5 h-5 rounded-full object-cover" referrerPolicy="no-referrer" />
@@ -1022,7 +1054,7 @@ export const Dashboard = () => {
                           <td className="py-3.5 font-medium">
                             <button
     onClick={() => setUserPremium(usr.id, !usr.isPremium)}
-    className={`px-2 py-0.5 rounded text-[10px] font-bold ${usr.isPremium ? "bg-amber-500/10 text-amber-555 dark:text-amber-500 border border-amber-505/20" : "bg-slate-100 dark:bg-slate-950 text-slate-600 dark:text-slate-500 border border-slate-200 dark:border-slate-850"}`}
+    className={`px-2 py-0.5 rounded text-[10px] font-bold ${usr.isPremium ? "bg-amber-500/10 text-amber-600 dark:text-amber-500 border border-amber-500/30" : "bg-slate-100 dark:bg-slate-950 text-slate-600 dark:text-slate-500 border border-slate-200 dark:border-slate-850"}`}
   >
                               {usr.isPremium ? "\u2605 Premium Actor" : "Standard"}
                             </button>

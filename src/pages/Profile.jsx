@@ -10,7 +10,35 @@ export const Profile = () => {
   const [userBio, setUserBio] = useState(currentUser ? currentUser.bio : "");
   const [userSkills, setUserSkills] = useState(currentUser ? currentUser.skills.join(", ") : "");
   const [userExperience, setUserExperience] = useState(currentUser ? currentUser.experience : "");
+  const [userAvatar, setUserAvatar] = useState(currentUser ? currentUser.avatar : "");
+  const [avatarUploading, setAvatarUploading] = useState(false);
   const [feedback, setFeedback] = useState("");
+
+  const handleAvatarUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setAvatarUploading(true);
+    const formData = new FormData();
+    formData.append("image", file);
+    try {
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      if (data.success) {
+        setUserAvatar(data.data.url);
+        setFeedback("Success: Avatar uploaded successfully!");
+      } else {
+        setFeedback("Error: Image upload failed.");
+      }
+    } catch (error) {
+      console.error(error);
+      setFeedback("Error: Image upload failed.");
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
   if (!currentUser) {
     return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20 px-4">
         <ShieldCheck className="w-16 h-16 text-indigo-500 dark:text-indigo-400 mb-4" />
@@ -27,7 +55,8 @@ export const Profile = () => {
       name: userName,
       bio: userBio,
       skills: userSkills.split(",").map((s) => s.trim()).filter((s) => s !== ""),
-      experience: userExperience
+      experience: userExperience,
+      avatar: userAvatar
     };
     setCurrentUser(updated);
     const index = usersList.findIndex((u) => u.id === currentUser.id);
@@ -107,6 +136,23 @@ export const Profile = () => {
       onChange={(e) => setUserName(e.target.value)}
       className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
     />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="font-semibold block text-slate-750 text-slate-700 dark:text-slate-400">Profile Avatar Image</label>
+                    <div className="flex items-center gap-3">
+                      <img src={userAvatar} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700" />
+                      <div className="flex-1">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleAvatarUpload}
+                          disabled={avatarUploading}
+                          className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-slate-900 dark:text-white outline-none focus:border-indigo-500 text-xs font-mono"
+                        />
+                      </div>
+                    </div>
+                    {avatarUploading && <p className="text-xs text-indigo-500 mt-1">Uploading image...</p>}
                   </div>
 
                   <div className="space-y-1">
