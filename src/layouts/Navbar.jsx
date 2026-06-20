@@ -21,13 +21,107 @@ export const Navbar = () => {
     toggleTheme,
     currentUser,
     setCurrentUser,
-    usersList
+    usersList,
+    startups,
+    applications
   } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showImpersonateDrop, setShowImpersonateDrop] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+
+  const getNotifications = () => {
+    if (!currentUser) return [];
+    const notifs = [];
+    
+    if (currentUser.role === "admin") {
+      const pendingStartups = startups?.filter(s => s.status === "pending") || [];
+      if (pendingStartups.length > 0) {
+        notifs.push({
+          id: "admin_1",
+          title: "Action Required",
+          message: `${pendingStartups.length} startup(s) pending your approval.`,
+          time: "Just now",
+          color: "text-amber-500"
+        });
+      }
+      notifs.push({
+        id: "admin_2",
+        title: "System Alert",
+        message: "Admin dashboard is active. You have full system privileges.",
+        time: "Active",
+        color: "text-indigo-500"
+      });
+    } else if (currentUser.role === "founder") {
+      const myStartups = startups?.filter(s => s.founderId === currentUser.id) || [];
+      const myStartupIds = myStartups.map(s => s.id);
+      const pendingApps = applications?.filter(a => myStartupIds.includes(a.startupId) && a.status === "pending") || [];
+      
+      if (pendingApps.length > 0) {
+        notifs.push({
+          id: "founder_1",
+          title: "New Applications!",
+          message: `You have ${pendingApps.length} pending candidate application(s) to review.`,
+          time: "Recent",
+          color: "text-emerald-500"
+        });
+      }
+      if (!currentUser.isPremium) {
+        notifs.push({
+          id: "founder_2",
+          title: "Promotional Offer",
+          message: "Upgrade to Founder Premium for prioritized visibility.",
+          time: "System",
+          color: "text-amber-500"
+        });
+      } else {
+        notifs.push({
+          id: "founder_3",
+          title: "Premium Active",
+          message: "Your premium benefits are fully active.",
+          time: "System",
+          color: "text-emerald-500"
+        });
+      }
+    } else {
+      const myApps = applications?.filter(a => (a.applicantEmail || a.applicant_email) === currentUser.email) || [];
+      const approvedApps = myApps.filter(a => a.status === "approved");
+      const rejectedApps = myApps.filter(a => a.status === "rejected");
+      
+      if (approvedApps.length > 0) {
+        notifs.push({
+          id: "collab_1",
+          title: "Application Approved! 🎉",
+          message: `Good news! ${approvedApps.length} of your applications have been accepted.`,
+          time: "Recent",
+          color: "text-emerald-500"
+        });
+      }
+      if (rejectedApps.length > 0) {
+        notifs.push({
+          id: "collab_2",
+          title: "Application Update",
+          message: `${rejectedApps.length} of your applications were declined. Keep trying!`,
+          time: "Recent",
+          color: "text-rose-500"
+        });
+      }
+      if (myApps.length === 0) {
+        notifs.push({
+          id: "collab_3",
+          title: "Welcome!",
+          message: "Explore opportunities and start applying to startups.",
+          time: "System",
+          color: "text-indigo-500"
+        });
+      }
+    }
+    return notifs;
+  };
+
+  const notifications = getNotifications();
+
   const activeLink = (path) => {
     return location.pathname === path ? "text-primary dark:text-secondary font-semibold" : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-slate-900 transition-colors";
   };
@@ -103,7 +197,9 @@ export const Navbar = () => {
     className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors relative"
   >
                   <Bell className="w-5 h-5" />
-                  <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-white dark:ring-slate-950" />
+                  {notifications.length > 0 && (
+                    <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-white dark:ring-slate-950" />
+                  )}
                 </button>
 
                 <AnimatePresence>
@@ -117,19 +213,20 @@ export const Navbar = () => {
   >
                         <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
                           <span className="font-bold text-sm">Notifications</span>
-                          <span className="text-[10px] bg-indigo-100 dark:bg-indigo-900/40 text-primary dark:text-indigo-300 px-2 py-0.5 rounded-full font-semibold">2 New</span>
+                          <span className="text-[10px] bg-indigo-100 dark:bg-indigo-900/40 text-primary dark:text-indigo-300 px-2 py-0.5 rounded-full font-semibold">{notifications.length} New</span>
                         </div>
                         <div className="divide-y divide-slate-100 dark:divide-slate-800 max-h-64 overflow-y-auto">
-                          <div className="px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-850 transition-colors">
-                            <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">New match recommendation!</p>
-                            <p className="text-[11px] text-slate-400 mt-0.5">EcoSphere Solutions posted a new hybrid developer role matching your active profile details.</p>
-                            <span className="text-[9px] text-indigo-500 mt-1 block">10 minutes ago</span>
-                          </div>
-                          <div className="px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-850 transition-colors">
-                            <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">Application Approved! 🎉</p>
-                            <p className="text-[11px] text-slate-400 mt-0.5">Your pitch to join AetherAI Tech as Senior UI Specialist has been reviewed and accepted.</p>
-                            <span className="text-[9px] text-emerald-500 mt-1 block">2 hours ago</span>
-                          </div>
+                          {notifications.length > 0 ? notifications.map(notif => (
+                            <div key={notif.id} className="group px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-200 transition-colors">
+                              <p className="text-xs text-slate-600 dark:text-slate-300 group-hover:dark:text-slate-900 font-medium">{notif.title}</p>
+                              <p className="text-[11px] text-slate-400 group-hover:dark:text-slate-700 mt-0.5">{notif.message}</p>
+                              <span className={`text-[9px] ${notif.color} mt-1 block`}>{notif.time}</span>
+                            </div>
+                          )) : (
+                            <div className="px-4 py-6 text-center">
+                              <p className="text-xs text-slate-500 dark:text-slate-400">No new notifications</p>
+                            </div>
+                          )}
                         </div>
                       </motion.div>
                     </>}
