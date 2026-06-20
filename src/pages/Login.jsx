@@ -54,56 +54,8 @@ export const Login = () => {
         </div>
 
         {
-          /* Demo Sandbox Credentials Panel */
+          /* Regular Login Form */
         }
-        <div className="bg-slate-50 dark:bg-slate-950/60 p-4 border border-slate-200 dark:border-slate-850 rounded-xl mb-6 space-y-3">
-          <div className="flex items-center gap-1.5 text-indigo-400 text-[10px] font-bold uppercase tracking-wider font-mono">
-            <Zap size={10} className="text-amber-500 fill-amber-500" />
-            <span>Role-Based Sandbox Credentials</span>
-          </div>
-          <p className="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed">
-            Click any account below to auto-fill the login fields, then sign in:
-          </p>
-          <div className="space-y-2 text-xxs">
-            <div 
-              onClick={() => { setEmail("sarah@ecosphere.com"); setPassword("password123A"); }}
-              className="p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all flex justify-between items-center"
-            >
-              <div>
-                <span className="font-bold text-slate-900 dark:text-white block">Founder Account (Sarah)</span>
-                <span className="font-mono text-slate-500">sarah@ecosphere.com</span>
-              </div>
-              <span className="bg-indigo-500/10 text-indigo-500 dark:text-indigo-400 px-1.5 py-0.5 rounded font-semibold text-[9px] uppercase">Founder</span>
-            </div>
-            <div 
-              onClick={() => { setEmail("marcus@dev.io"); setPassword("password123A"); }}
-              className="p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all flex justify-between items-center"
-            >
-              <div>
-                <span className="font-bold text-slate-900 dark:text-white block">Collaborator Account (Marcus)</span>
-                <span className="font-mono text-slate-500">marcus@dev.io</span>
-              </div>
-              <span className="bg-cyan-500/10 text-cyan-500 dark:text-cyan-400 px-1.5 py-0.5 rounded font-semibold text-[9px] uppercase">Collaborator</span>
-            </div>
-            <div 
-              onClick={() => { setEmail("admin@startupforge.com"); setPassword("password123A"); }}
-              className="p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all flex justify-between items-center"
-            >
-              <div>
-                <span className="font-bold text-slate-900 dark:text-white block">Admin Account (Moderator)</span>
-                <span className="font-mono text-slate-500">admin@startupforge.com</span>
-              </div>
-              <span className="bg-amber-500/10 text-amber-500 dark:text-amber-400 px-1.5 py-0.5 rounded font-semibold text-[9px] uppercase">Admin</span>
-            </div>
-          </div>
-          <div className="text-[9px] text-slate-500 text-center font-mono border-t border-slate-200/60 dark:border-slate-850 pt-2">
-            Standard Password: <strong className="text-slate-700 dark:text-slate-300 select-all">password123A</strong>
-          </div>
-        </div>
-
-        {
-    /* Regular Login Form */
-  }
         <form onSubmit={handleManualLogin} className="space-y-4 text-xs text-slate-650 dark:text-slate-350">
           
           {errorMessage && <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-500 rounded-lg text-xxs font-medium flex items-center gap-1.5 leading-relaxed">

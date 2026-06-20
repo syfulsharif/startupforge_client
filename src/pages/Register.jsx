@@ -126,25 +126,6 @@ export const Register = () => {
           </div>
 
           {
-    /* Preset Profile Avatars */
-  }
-          <div className="space-y-1">
-            <label className="text-slate-700 dark:text-slate-330 font-semibold block flex items-center gap-1">
-              <Camera size={13} className="text-slate-500" /> Select Sandbox Avatar
-            </label>
-            <div className="flex gap-3 pt-1">
-              {presetAvatars.map((url, i) => <button
-    key={i}
-    type="button"
-    onClick={() => setAvatar(url)}
-    className={`w-10 h-10 rounded-full overflow-hidden border-2 transition ${avatar === url ? "ring-2 ring-indigo-500 border-slate-300 dark:border-white" : "border-transparent opacity-60 hover:opacity-100"}`}
-  >
-                  <img src={url} alt={`avatar-${i}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                </button>)}
-            </div>
-          </div>
-
-          {
     /* Password box */
   }
           <div className="space-y-1">
@@ -156,7 +137,7 @@ export const Register = () => {
     value={password}
     onChange={(e) => setPassword(e.target.value)}
     placeholder="••••••"
-    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg py-2 px-3 text-slate-900 dark:text-slate-205 outline-none focus:border-indigo-500 text-xs"
+    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg py-2 pl-3 pr-10 text-slate-900 dark:text-slate-200 outline-none focus:border-indigo-500 text-xs"
   />
               <button
     type="button"
