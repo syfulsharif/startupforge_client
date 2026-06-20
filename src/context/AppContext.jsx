@@ -587,7 +587,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const updateProfileCV = async (skills, bio, experience) => {
+  const updateProfileCV = async (name, skills, bio, experience, image) => {
     try {
       const res = await fetch(`${API_URL}/auth/profile`, {
         method: 'PUT',
@@ -595,7 +595,7 @@ export const AppProvider = ({ children }) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
         },
-        body: JSON.stringify({ skills, bio, experience })
+        body: JSON.stringify({ name, skills, bio, experience, image })
       });
       const data = await res.json();
       if (data.success) {

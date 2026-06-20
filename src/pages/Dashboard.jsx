@@ -47,7 +47,8 @@ export const Dashboard = () => {
     deleteOpportunity,
     updateApplicationStatus,
     updateUserStatus,
-    setUserPremium
+    setUserPremium,
+    updateProfileCV
   } = useApp();
   if (!currentUser) {
     return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20 px-4 text-center">
@@ -69,7 +70,7 @@ export const Dashboard = () => {
   const myActiveStartup = myStartups[0] || null;
   const myOpportunities = myActiveStartup ? opportunities.filter((o) => o.startupId === myActiveStartup.id) : [];
   const myStartupApplications = myActiveStartup ? applications.filter((a) => a.startupId === myActiveStartup.id) : [];
-  const myCollaboratorApplications = applications.filter((a) => a.applicantId === currentUser.id);
+  const myCollaboratorApplications = applications.filter((a) => (a.applicantEmail || a.applicant_email) === currentUser.email);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
   const [startupName, setStartupName] = useState(myActiveStartup ? myActiveStartup.name : "");
@@ -184,13 +185,17 @@ export const Dashboard = () => {
     setOppDescription("");
     setOppSalary("");
   };
-  const handleProfileSubmit = (e) => {
+  const handleProfileSubmit = async (e) => {
     e.preventDefault();
     setProfileFormFeedback("");
-    currentUser.skills = profileSkills.split(",").map((s) => s.trim());
-    currentUser.bio = profileBio;
-    currentUser.experience = profileExperience;
-    setProfileFormFeedback("Success: Collaborator CV has been finalized and refreshed!");
+    const skillsArray = profileSkills.split(",").map((s) => s.trim()).filter((s) => s !== "");
+    // Maintain existing name and avatar when updating from the dashboard
+    const success = await updateProfileCV(currentUser.name, skillsArray, profileBio, profileExperience, currentUser.avatar);
+    if (success) {
+      setProfileFormFeedback("Success: Collaborator CV has been finalized and refreshed!");
+    } else {
+      setProfileFormFeedback("Error: Failed to update CV.");
+    }
   };
   const chartsApplicationData = [
     { name: "Jan", count: 12 },
@@ -380,8 +385,17 @@ export const Dashboard = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   <div className="glass-card rounded-2xl p-5 shadow-md">
                     <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">Startup Profile Managed</span>
-                    <span className="font-display font-bold text-lg text-slate-900 dark:text-white mt-2 block truncate">
-                      {myActiveStartup ? `${myActiveStartup.logo} ${myActiveStartup.name}` : "(No registered startup yet)"}
+                    <span className="font-display font-bold text-lg text-slate-900 dark:text-white mt-2 flex items-center gap-2 truncate">
+                      {myActiveStartup ? (
+                        <>
+                          <span className="w-6 h-6 shrink-0 flex items-center justify-center rounded overflow-hidden bg-slate-100 dark:bg-slate-900 text-sm">
+                            {myActiveStartup.logo && myActiveStartup.logo.startsWith("http") ? <img src={myActiveStartup.logo} alt="Logo" className="w-full h-full object-cover" loading="lazy" decoding="async" /> : myActiveStartup.logo}
+                          </span>
+                          <span className="truncate">{myActiveStartup.name}</span>
+                        </>
+                      ) : (
+                        "(No registered startup yet)"
+                      )}
                     </span>
                     {!myActiveStartup && <button onClick={() => setActiveTab("my-startup")} className="text-xxs text-indigo-500 dark:text-indigo-400 font-bold hover:underline mt-2">Initialize company &gt;</button>}
                   </div>

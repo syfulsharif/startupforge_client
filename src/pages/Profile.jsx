@@ -3,7 +3,7 @@ import { useApp } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { ShieldCheck, Code, BookOpen, Crown, ChevronRight } from "lucide-react";
 export const Profile = () => {
-  const { currentUser, setCurrentUser, usersList } = useApp();
+  const { currentUser, updateProfileCV } = useApp();
   const navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(currentUser ? currentUser.name : "");
@@ -27,8 +27,11 @@ export const Profile = () => {
       });
       const data = await response.json();
       if (data.success) {
-        setUserAvatar(data.data.url);
-        setFeedback("Success: Avatar uploaded successfully!");
+        const newAvatarUrl = data.data.url;
+        setUserAvatar(newAvatarUrl);
+        const skillsArray = userSkills.split(",").map((s) => s.trim()).filter((s) => s !== "");
+        await updateProfileCV(userName, skillsArray, userBio, userExperience, newAvatarUrl);
+        setFeedback("Success: Avatar uploaded and saved successfully!");
       } else {
         setFeedback("Error: Image upload failed.");
       }
@@ -47,24 +50,17 @@ export const Profile = () => {
         <button onClick={() => navigate("/login")} className="mt-5 bg-primary text-white py-2 px-5 rounded-lg text-xs font-semibold">Login</button>
       </div>;
   }
-  const handleUpdateProfile = (e) => {
+  const handleUpdateProfile = async (e) => {
     e.preventDefault();
     setFeedback("");
-    const updated = {
-      ...currentUser,
-      name: userName,
-      bio: userBio,
-      skills: userSkills.split(",").map((s) => s.trim()).filter((s) => s !== ""),
-      experience: userExperience,
-      avatar: userAvatar
-    };
-    setCurrentUser(updated);
-    const index = usersList.findIndex((u) => u.id === currentUser.id);
-    if (index !== -1) {
-      usersList[index] = updated;
+    const skillsArray = userSkills.split(",").map((s) => s.trim()).filter((s) => s !== "");
+    const success = await updateProfileCV(userName, skillsArray, userBio, userExperience, userAvatar);
+    if (success) {
+      setFeedback("Success: System profile credentials locked and finalized!");
+      setEditMode(false);
+    } else {
+      setFeedback("Error: Failed to update profile.");
     }
-    setFeedback("Success: System profile credentials locked and finalized!");
-    setEditMode(false);
   };
   return <div className="min-h-screen bg-transparent text-slate-800 dark:text-slate-200 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern">
       <div className="max-w-4xl mx-auto">
