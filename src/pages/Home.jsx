@@ -142,7 +142,7 @@ export const Home = () => {
           <span className="w-3 h-3 rounded-full bg-amber-500/80" />
           <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
         </div>
-        <div className="border-b border-slate-200 dark:border-slate-800/80 pb-3 mb-4 mt-1 flex justify-center text-xs text-slate-500 font-mono">
+        <div className="border-b border-slate-200 dark:border-slate-800/80 pb-3 mb-4 mt-1 flex justify-center text-xs text-slate-200 font-mono">
           On Boardng Oppotunities
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
