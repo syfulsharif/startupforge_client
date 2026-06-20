@@ -50,27 +50,16 @@ export const Dashboard = () => {
     setUserPremium,
     updateProfileCV
   } = useApp();
-  if (!currentUser) {
-    return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20 px-4 text-center">
-        <LayoutDashboard className="w-16 h-16 text-indigo-500 dark:text-indigo-400 mb-4" />
-        <h2 className="font-display font-bold text-2xl">Sandbox Session Logged Out</h2>
-        <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 max-w-sm">No active actor is logged in. Use the top bar switcher or log in manually.</p>
-        <div className="mt-6 flex gap-3">
-          <Link to="/login" className="bg-primary text-white py-2 px-5 rounded-lg text-xs font-semibold">Login Portal</Link>
-          <Link to="/" className="bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 py-2 px-5 rounded-lg text-xs font-semibold">Back Home</Link>
-        </div>
-      </div>;
-  }
   const [activeTab, setActiveTab] = useState(() => {
-    if (currentUser.role === "founder") return "overview";
-    if (currentUser.role === "admin") return "overview";
+    if (currentUser?.role === "founder") return "overview";
+    if (currentUser?.role === "admin") return "overview";
     return "overview";
   });
-  const myStartups = startups.filter((s) => s.founderId === currentUser.id);
+  const myStartups = startups.filter((s) => s.founderId === currentUser?.id);
   const myActiveStartup = myStartups[0] || null;
   const myOpportunities = myActiveStartup ? opportunities.filter((o) => o.startupId === myActiveStartup.id) : [];
   const myStartupApplications = myActiveStartup ? applications.filter((a) => a.startupId === myActiveStartup.id) : [];
-  const myCollaboratorApplications = applications.filter((a) => (a.applicantEmail || a.applicant_email) === currentUser.email);
+  const myCollaboratorApplications = applications.filter((a) => (a.applicantEmail || a.applicant_email) === currentUser?.email);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
   const [startupName, setStartupName] = useState(myActiveStartup ? myActiveStartup.name : "");
@@ -119,9 +108,9 @@ export const Dashboard = () => {
   const [oppSalary, setOppSalary] = useState("");
   const [oppDescription, setOppDescription] = useState("");
   const [oppFormFeedback, setOppFormFeedback] = useState("");
-  const [profileSkills, setProfileSkills] = useState(currentUser.skills.join(", "));
-  const [profileBio, setProfileBio] = useState(currentUser.bio);
-  const [profileExperience, setProfileExperience] = useState(currentUser.experience);
+  const [profileSkills, setProfileSkills] = useState(currentUser?.skills?.join(", ") || "");
+  const [profileBio, setProfileBio] = useState(currentUser?.bio || "");
+  const [profileExperience, setProfileExperience] = useState(currentUser?.experience || "");
   const [profileFormFeedback, setProfileFormFeedback] = useState("");
   const handleStartupSubmit = (e) => {
     e.preventDefault();
@@ -219,6 +208,19 @@ export const Dashboard = () => {
     { name: "Applicants", value: applications.length },
     { name: "Payments log", value: payments.length }
   ];
+
+  if (!currentUser) {
+    return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20 px-4 text-center">
+        <LayoutDashboard className="w-16 h-16 text-indigo-500 dark:text-indigo-400 mb-4" />
+        <h2 className="font-display font-bold text-2xl">Sandbox Session Logged Out</h2>
+        <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 max-w-sm">No active actor is logged in. Use the top bar switcher or log in manually.</p>
+        <div className="mt-6 flex gap-3">
+          <Link to="/login" className="bg-primary text-white py-2 px-5 rounded-lg text-xs font-semibold">Login Portal</Link>
+          <Link to="/" className="bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 py-2 px-5 rounded-lg text-xs font-semibold">Back Home</Link>
+        </div>
+      </div>;
+  }
+
   return <div className="min-h-screen bg-transparent text-slate-800 dark:text-slate-200 flex flex-col md:flex-row">
       
       {
