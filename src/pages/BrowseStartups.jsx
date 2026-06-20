@@ -111,8 +111,8 @@ export const BrowseStartups = () => {
   >
                   <div>
                     <div className="flex gap-4">
-                      <span className="text-4xl bg-slate-100 dark:bg-slate-950 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 w-14 h-14 flex items-center justify-center">
-                        {startup.logo}
+                      <span className="text-4xl bg-slate-100 dark:bg-slate-950 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 w-14 h-14 flex items-center justify-center overflow-hidden">
+                        {startup.logo && startup.logo.startsWith("http") ? <img src={startup.logo} alt={startup.name} loading="lazy" decoding="async" className="w-full h-full object-cover rounded-xl" /> : startup.logo}
                       </span>
                       <div className="min-w-0">
                         <h3 className="font-display font-black text-lg text-slate-900 dark:text-white truncate hover:text-indigo-400">

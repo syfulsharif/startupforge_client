@@ -40,8 +40,8 @@ export const StartupDetails = () => {
 
           <div className="flex flex-col sm:flex-row gap-6 items-start justify-between relative z-10">
             <div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center">
-              <span className="text-5xl bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 w-20 h-20 flex items-center justify-center">
-                {startup.logo}
+              <span className="text-5xl bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 w-20 h-20 flex items-center justify-center overflow-hidden">
+                {startup.logo && startup.logo.startsWith("http") ? <img src={startup.logo} alt={startup.name} loading="lazy" decoding="async" className="w-full h-full object-cover rounded-xl" /> : startup.logo}
               </span>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">

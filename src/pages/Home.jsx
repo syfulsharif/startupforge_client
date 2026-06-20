@@ -218,8 +218,8 @@ export const Home = () => {
     className="glass-card rounded-2xl p-6 hover:border-indigo-500/35 transition duration-300 flex flex-col h-full shadow-lg hover:shadow-indigo-500/5"
   >
               <div className="flex items-center gap-4">
-                <span className="text-3xl bg-slate-100 dark:bg-slate-800 p-2.5 rounded-lg w-12 h-12 flex items-center justify-center border border-slate-200 dark:border-slate-700">
-                  {startup.logo}
+                <span className="text-3xl bg-slate-100 dark:bg-slate-800 p-2.5 rounded-lg w-12 h-12 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
+                  {startup.logo && startup.logo.startsWith("http") ? <img src={startup.logo} alt={startup.name} loading="lazy" decoding="async" className="w-full h-full object-cover rounded-md" /> : startup.logo}
                 </span>
                 <div>
                   <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white truncate max-w-[180px]">{startup.name}</h3>

@@ -1034,8 +1034,6 @@ export const Dashboard = () => {
                     <thead>
                       <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 text-xxs uppercase tracking-wider font-mono">
                         <th className="py-3">Account Creator</th>
-                        <th className="py-3">Email Address</th>
-                        <th className="py-3">System Role</th>
                         <th className="py-3">Upgrade Level</th>
                         <th className="py-3">Status</th>
                         <th className="py-3 text-right">Moderator Decisions</th>
@@ -1044,13 +1042,19 @@ export const Dashboard = () => {
                     <tbody className="divide-y divide-slate-200 dark:divide-slate-850">
                       {usersList.map((usr) => <tr key={usr.id} className="text-slate-700 dark:text-slate-350 even:bg-slate-50 dark:even:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                           <td className="py-3.5 pr-2">
-                            <div className="flex items-center gap-2">
-                              <img src={usr.avatar} alt={usr.name} className="w-5 h-5 rounded-full object-cover" referrerPolicy="no-referrer" />
-                              <span className="font-bold text-slate-900 dark:text-white">{usr.name}</span>
+                            <div className="flex items-center gap-3">
+                              <img src={usr.avatar} alt={usr.name} className="w-8 h-8 rounded-full object-cover" referrerPolicy="no-referrer" />
+                              <div>
+                                <span className="font-bold text-slate-900 dark:text-white">{usr.name}</span>
+                                <div className="flex items-center gap-2 mt-0.5">
+                                  <span className="text-[10px] text-slate-500 font-mono">{usr.email}</span>
+                                  <span className="bg-slate-200 dark:bg-slate-800 text-[9px] px-1.5 py-0.5 rounded capitalize font-semibold text-slate-600 dark:text-slate-400">
+                                    {usr.role}
+                                  </span>
+                                </div>
+                              </div>
                             </div>
                           </td>
-                          <td className="py-3.5 font-mono">{usr.email}</td>
-                          <td className="py-3.5 capitalize font-semibold">{usr.role}</td>
                           <td className="py-3.5 font-medium">
                             <button
     onClick={() => setUserPremium(usr.id, !usr.isPremium)}
@@ -1104,11 +1108,15 @@ export const Dashboard = () => {
                     </thead>
                     <tbody className="divide-y divide-slate-200 dark:divide-slate-850">
                       {startups.map((st) => <tr key={st.id} className="text-slate-700 dark:text-slate-350 hover:bg-slate-200/50 dark:hover:bg-slate-850/10 transition">
-                          <td className="py-3.5 font-bold text-slate-900 dark:text-white pr-3">
-                            <span className="text-sm rounded bg-slate-100 dark:bg-slate-950 p-1 mr-1">{st.logo}</span>
-                            {st.name}
+                          <td className="py-3.5 pr-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm rounded bg-slate-100 dark:bg-slate-950 p-1 w-7 h-7 flex items-center justify-center overflow-hidden shrink-0">
+                                {st.logo && st.logo.startsWith("http") ? <img src={st.logo} alt={st.name} loading="lazy" decoding="async" className="w-full h-full object-cover rounded-sm" /> : st.logo}
+                              </span>
+                              <span className="font-bold text-slate-900 dark:text-white">{st.name}</span>
+                            </div>
                           </td>
-                          <td className="py-3.5">{st.industry}</td>
+                          <td className="py-3.5 font-semibold text-slate-900 dark:text-white">{st.industry}</td>
                           <td className="py-3.5 text-slate-500 dark:text-slate-400">{st.founderName}</td>
                           <td className="py-3.5 font-mono text-slate-500 dark:text-slate-400">{st.fundingStage}</td>
                           <td className="py-3.5">
