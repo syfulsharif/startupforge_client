@@ -23,7 +23,7 @@ export const StartupDetails = () => {
   }
         <button
     onClick={() => navigate(-1)}
-    className="inline-flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white mb-8 group"
+    className="inline-flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-900 mb-8 group"
   >
           <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
           <span>Back to browser list</span>
@@ -129,7 +129,7 @@ export const StartupDetails = () => {
                 </div> : <div className="divide-y divide-slate-200 dark:divide-slate-850">
                   {relatedOpp.map((opp) => <div key={opp.id} className="py-4 first:pt-0 last:pb-0 flex justify-between items-center gap-4">
                       <div className="min-w-0">
-                        <Link to={`/opportunities/${opp.id}`} className="font-bold text-sm text-slate-800 dark:text-slate-200 hover:text-indigo-650 dark:hover:text-indigo-400 truncate block">
+                        <Link to={`/opportunities/${opp.id}`} className="font-bold text-sm text-slate-800 dark:text-slate-200 hover:text-indigo-650 dark:hover:text-slate-900 truncate block">
                            {opp.title}
                         </Link>
                         <div className="flex flex-wrap gap-2 items-center text-[10px] text-slate-600 dark:text-slate-400 mt-1">

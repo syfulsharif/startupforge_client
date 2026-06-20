@@ -256,9 +256,19 @@ export const Profile = () => {
                 </div>
                 <div>
                   <span className="text-slate-500 block uppercase text-[9px] font-mono">Premium Protection Status</span>
-                  <span className="text-amber-600 dark:text-amber-500 block font-semibold mt-0.5">
-                    {currentUser.isPremium ? "\u2605 Enabled" : "None Upgrade"}
-                  </span>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-amber-600 dark:text-amber-500 block font-semibold">
+                      {currentUser.isPremium ? "\u2605 Enabled" : "None Upgrade"}
+                    </span>
+                    {currentUser.role === "founder" && !currentUser.isPremium && (
+                      <button
+                        onClick={() => navigate("/payment")}
+                        className="bg-amber-500 hover:bg-amber-600 text-white text-[10px] px-2 py-0.5 rounded font-bold transition"
+                      >
+                        Upgrade
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

@@ -246,35 +246,35 @@ export const Dashboard = () => {
           {currentUser.role === "founder" && <>
               <button
     onClick={() => setActiveTab("overview")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "overview" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-205 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "overview" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-205 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <LayoutDashboard size={15} />
                 <span>Overview Analytics</span>
               </button>
               <button
     onClick={() => setActiveTab("my-startup")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "my-startup" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "my-startup" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <Building size={15} />
                 <span>My Startup Profile</span>
               </button>
               <button
     onClick={() => setActiveTab("add-opportunity")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "add-opportunity" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "add-opportunity" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <PlusCircle size={15} />
                 <span>Post Open Job</span>
               </button>
               <button
     onClick={() => setActiveTab("manage-opportunities")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "manage-opportunities" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "manage-opportunities" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <ListTodo size={15} />
                 <span>Manage Roles ({myOpportunities.length})</span>
               </button>
               <button
     onClick={() => setActiveTab("applications")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "applications" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "applications" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <FileText size={15} />
                 <span>Applicants ({myStartupApplications.length})</span>
@@ -284,21 +284,21 @@ export const Dashboard = () => {
           {currentUser.role === "collaborator" && <>
               <button
     onClick={() => setActiveTab("overview")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "overview" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "overview" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <LayoutDashboard size={15} />
                 <span>Application Metrics</span>
               </button>
               <button
     onClick={() => setActiveTab("my-applications")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "my-applications" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "my-applications" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <FileText size={15} />
                 <span>My Applied Pitch ({myCollaboratorApplications.length})</span>
               </button>
               <button
     onClick={() => setActiveTab("profile")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "profile" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "profile" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <UserSquare2 size={15} />
                 <span>Edit Collaborator CV</span>
@@ -308,28 +308,28 @@ export const Dashboard = () => {
           {currentUser.role === "admin" && <>
               <button
     onClick={() => setActiveTab("overview")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "overview" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "overview" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <LayoutDashboard size={15} />
                 <span>Moderator Audit desk</span>
               </button>
               <button
     onClick={() => setActiveTab("manage-users")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "manage-users" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "manage-users" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <Users size={15} />
                 <span>Manage Accounts ({usersList.length})</span>
               </button>
               <button
     onClick={() => setActiveTab("manage-startups")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "manage-startups" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "manage-startups" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <Building size={15} />
                 <span>Manage Startups ({startups.length})</span>
               </button>
               <button
     onClick={() => setActiveTab("transactions")}
-    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "transactions" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2.5 transition ${activeTab === "transactions" ? "bg-primary text-white font-bold" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-850 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 <DollarSign size={15} />
                 <span>Bank Ledgers ({payments.length})</span>
@@ -337,14 +337,29 @@ export const Dashboard = () => {
             </>}
 
           <div className="pt-6 select-none">
-            <span className="text-[9px] uppercase font-mono text-slate-500 block px-3 mb-1">PROMOTIONAL OFFER</span>
-            <Link
-    to="/payment"
-    className="px-3 py-2 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/20 hover:bg-amber-500/25 transition flex items-center gap-1.5 font-bold text-xxs block"
-  >
-              <Crown size={12} className="shrink-0" />
-              <span>Get Founder Premium</span>
-            </Link>
+            {currentUser.isPremium ? (
+              <>
+                <span className="text-[9px] uppercase font-mono text-slate-500 block px-3 mb-1">PREMIUM STATUS</span>
+                <button
+                  disabled
+                  className="w-full px-3 py-2 rounded-lg bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 flex items-center gap-1.5 font-bold text-xxs text-left opacity-80 cursor-not-allowed"
+                >
+                  <Crown size={12} className="shrink-0" />
+                  <span>Premium Active</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <span className="text-[9px] uppercase font-mono text-slate-500 block px-3 mb-1">PROMOTIONAL OFFER</span>
+                <Link
+                  to="/payment"
+                  className="px-3 py-2 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/20 hover:bg-amber-500/25 transition flex items-center gap-1.5 font-bold text-xxs block"
+                >
+                  <Crown size={12} className="shrink-0" />
+                  <span>Get Founder Premium</span>
+                </Link>
+              </>
+            )}
           </div>
 
         </nav>
@@ -721,7 +736,7 @@ export const Dashboard = () => {
                             <td className="py-3.5 text-right">
                               <button
     onClick={() => deleteOpportunity(opp.id)}
-    className="text-rose-500 hover:text-rose-450 dark:hover:text-rose-400 transition"
+    className="text-rose-500 hover:text-rose-450 dark:hover:text-slate-900 transition"
     title="Delete Position"
   >
                                 <Trash2 size={16} className="inline" />

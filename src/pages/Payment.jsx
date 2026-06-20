@@ -16,12 +16,12 @@ export const Payment = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { currentUser, addPayment, verifyPaymentSession, addToast } = useApp();
-  
+
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedPlanPrice, setSelectedPlanPrice] = useState(49); // Price updated to match backend options
   const [selectedPlanName, setSelectedPlanName] = useState("Founder Premium Plan");
-  
+
   const [receiptCode, setReceiptCode] = useState("");
   const [receiptDate, setReceiptDate] = useState("");
   const [paymentError, setPaymentError] = useState("");
@@ -84,7 +84,7 @@ export const Payment = () => {
   return (
     <div className="min-h-screen bg-transparent text-slate-800 dark:text-slate-200 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern flex flex-col justify-center items-center">
       <div className="max-w-4xl mx-auto w-full">
-        
+
         {loading && !paymentSuccess && (
           <div className="glass-card rounded-2xl p-16 text-center max-w-lg mx-auto shadow-xl space-y-4">
             <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-500 mx-auto"></div>
@@ -100,7 +100,7 @@ export const Payment = () => {
             <AlertTriangle className="w-12 h-12 text-rose-500 mx-auto" />
             <p className="font-bold text-slate-900 dark:text-white text-base">Transaction Error</p>
             <p className="text-xs text-slate-650 dark:text-slate-400">{paymentError}</p>
-            <button 
+            <button
               onClick={() => { setPaymentError(""); navigate("/payment", { replace: true }); }}
               className="mt-2 text-xs bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg transition"
             >
@@ -112,10 +112,10 @@ export const Payment = () => {
         {!loading && !paymentError && !paymentSuccess && (
           /* Checkout upgrade form */
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            
+
             {/* Left side benefits review panel */}
             <div className="glass-card rounded-2xl p-6 sm:p-10 space-y-6 shadow-xl">
-              
+
               <div className="space-y-2">
                 <span className="inline-flex items-center gap-1 bg-amber-500/10 border border-amber-500/30 text-amber-500 py-1 px-3 rounded-full text-xs font-bold uppercase tracking-wider font-mono">
                   <Crown size={12} className="fill-amber-500" /> Platform Premium
@@ -131,7 +131,7 @@ export const Payment = () => {
               {/* Pricing details */}
               <div className="p-5 border border-primary/30 bg-primary/5 rounded-xl text-left transition duration-200">
                 <p className="text-xxs uppercase font-mono text-primary tracking-wider font-bold">PREMIUM LIFETIME UNLOCK</p>
-                <p className="text-3xl font-black text-slate-900 dark:text-white mt-1">$49<span className="text-xs text-slate-500 dark:text-slate-400 font-normal"> CAD</span></p>
+                <p className="text-3xl font-black text-slate-900 dark:text-white mt-1">$49<span className="text-xs text-slate-500 dark:text-slate-400 font-normal"> USD</span></p>
                 <p className="text-xxs text-slate-500 dark:text-slate-400 mt-1">One-time payment for unlimited listings access</p>
               </div>
 
@@ -162,14 +162,14 @@ export const Payment = () => {
               )}
 
               <form onSubmit={handleProcessUpgrade} className="space-y-4 text-xs text-slate-350 col-span-1">
-                
+
                 {/* Billing Summary description */}
                 <div className="bg-slate-50 dark:bg-slate-950/80 p-4 rounded-lg border border-slate-200 dark:border-slate-850 flex justify-between items-center text-xs font-sans">
                   <div>
                     <span className="text-slate-500 text-[10px] uppercase font-mono block">Billing plan selected:</span>
                     <span className="text-slate-900 dark:text-white font-bold">{selectedPlanName}</span>
                   </div>
-                  <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-base leading-none">${selectedPlanPrice} CAD</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-base leading-none">${selectedPlanPrice} USD</span>
                 </div>
 
                 <p className="text-xxs text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -230,7 +230,7 @@ export const Payment = () => {
               </div>
               <div className="flex justify-between items-center">
                 <span>Total Settled Fee</span>
-                <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold">${selectedPlanPrice} CAD</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold">${selectedPlanPrice} USD</span>
               </div>
               <div className="flex justify-between items-center">
                 <span>Date Settled</span>

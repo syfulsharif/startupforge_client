@@ -111,14 +111,14 @@ export const Register = () => {
               <button
     type="button"
     onClick={() => setRole("collaborator")}
-    className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "collaborator" ? "bg-primary/10 border-primary text-white" : "bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-850 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "collaborator" ? "bg-primary/10 border-primary text-white" : "bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-850 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 Collaborator / Builder
               </button>
               <button
     type="button"
     onClick={() => setRole("founder")}
-    className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "founder" ? "bg-primary/10 border-primary text-white" : "bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-850 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"}`}
+    className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "founder" ? "bg-primary/10 border-primary text-white" : "bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-850 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900"}`}
   >
                 Startup Founder / Initiator
               </button>

@@ -34,9 +34,9 @@ export const Footer = () => {
             Platform Pages
           </h3>
           <ul className="space-y-2 text-xs">
-            <li><Link to="/" className="hover:text-slate-950 dark:hover:text-white transition-colors">Home Landing</Link></li>
-            <li><Link to="/startups" className="hover:text-slate-950 dark:hover:text-white transition-colors">Browse Startups</Link></li>
-            <li><Link to="/opportunities" className="hover:text-slate-950 dark:hover:text-white transition-colors">Assemble Collaborators</Link></li>
+            <li><Link to="/" className="hover:text-slate-950 dark:hover:text-slate-900 transition-colors">Home Landing</Link></li>
+            <li><Link to="/startups" className="hover:text-slate-950 dark:hover:text-slate-900 transition-colors">Browse Startups</Link></li>
+            <li><Link to="/opportunities" className="hover:text-slate-950 dark:hover:text-slate-900 transition-colors">Assemble Collaborators</Link></li>
             <li><Link to="/payment" className="hover:text-amber-400 transition-colors flex items-center gap-1">Upgrade to Premium</Link></li>
           </ul>
         </div>
@@ -70,7 +70,7 @@ export const Footer = () => {
             </li>
             <li className="flex items-center gap-2">
               <Mail size={14} className="text-primary flex-shrink-0" />
-              <a href="mailto:support@startupforge.co" className="hover:text-slate-950 dark:hover:text-white transition-colors">support@startupforge.co</a>
+              <a href="mailto:support@startupforge.co" className="hover:text-slate-950 dark:hover:text-slate-900 transition-colors">support@startupforge.co</a>
             </li>
             <li className="flex items-center gap-2">
               <Phone size={14} className="text-primary flex-shrink-0" />
