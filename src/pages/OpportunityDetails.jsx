@@ -176,7 +176,11 @@ export const OpportunityDetails = () => {
               >
                 Login to Apply
               </Link>
-            </div> : <button
+            </div> : currentUser.id === startup.founderId ? (
+              <div className="w-full text-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 py-2.5 rounded-lg text-xs font-bold cursor-not-allowed">
+                You posted this position
+              </div>
+            ) : <button
               onClick={() => setShowApplyModal(true)}
               className="w-full text-center bg-primary hover:bg-primary/95 text-white py-2.5 rounded-lg text-xs font-bold shadow-lg shadow-primary/20 transition cursor-pointer"
             >

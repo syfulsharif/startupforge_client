@@ -5,14 +5,14 @@ import { Search, Briefcase, Grid, List, ArrowDownWideNarrow, Sparkles } from 'lu
 
 export const BrowseOpportunities = () => {
   const { fetchOpportunities, startups } = useApp();
-  
+
   // Search & filter states
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedIndustry, setSelectedIndustry] = useState('All');
   const [selectedWorkType, setSelectedWorkType] = useState('All');
   const [selectedCommitment, setSelectedCommitment] = useState('All');
   const [sortBy, setSortBy] = useState('newest');
-  
+
   // Pagination & data states
   const [loadedOpportunities, setLoadedOpportunities] = useState([]);
   const [page, setPage] = useState(1);
@@ -64,7 +64,7 @@ export const BrowseOpportunities = () => {
   return (
     <div className="min-h-screen bg-transparent text-slate-850 dark:text-slate-150 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Header Segment */}
         <div className="mb-10 text-center md:text-left flex flex-col md:flex-row justify-between items-center md:items-end gap-6">
           <div>
@@ -82,14 +82,14 @@ export const BrowseOpportunities = () => {
 
           {/* Grid/List toggle */}
           <div className="flex items-center gap-3 bg-white/45 dark:bg-slate-900/45 border border-slate-200 dark:border-white/5 p-1.5 rounded-lg backdrop-blur-md shadow-sm">
-            <button 
+            <button
               onClick={() => setIsGridView(true)}
               className={`p-1.5 rounded transition ${isGridView ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white'}`}
               title="Grid View"
             >
               <Grid size={15} />
             </button>
-            <button 
+            <button
               onClick={() => setIsGridView(false)}
               className={`p-1.5 rounded transition ${!isGridView ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white'}`}
               title="List View"
@@ -101,12 +101,12 @@ export const BrowseOpportunities = () => {
 
         {/* Toolbar & Search Options */}
         <div className="glass-card rounded-2xl p-5 mb-8 space-y-4">
-          
+
           {/* Seek search text inputs */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="relative md:col-span-2">
               <Search className="absolute left-3 top-2.5 text-slate-500 w-4 h-4" />
-              <input 
+              <input
                 type="text"
                 placeholder="Search roles (e.g. Lead, Frontend, Figma, Rust...)"
                 value={searchTerm}
@@ -191,7 +191,7 @@ export const BrowseOpportunities = () => {
             <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">
               Try adjusting your query words (e.g. selecting 'All' work modes or commitments) to search the wider list.
             </p>
-            <button 
+            <button
               onClick={() => { setSearchTerm(''); setSelectedIndustry('All'); setSelectedWorkType('All'); setSelectedCommitment('All'); }}
               className="mt-5 text-xs bg-slate-200 dark:bg-slate-800 hover:bg-slate-350 dark:hover:bg-slate-700 text-slate-700 dark:text-white font-semibold py-2 px-4 rounded-lg transition"
             >
@@ -202,13 +202,13 @@ export const BrowseOpportunities = () => {
           /* Grid View Layout */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {loadedOpportunities.map(opp => (
-              <div 
+              <div
                 key={opp.id}
                 className="glass-card rounded-2xl p-6 flex flex-col justify-between hover:border-cyan-500/35 hover:shadow-2xl hover:shadow-cyan-500/5 transition duration-350 shadow-lg"
               >
                 <div>
                   <div className="flex justify-between items-start gap-2">
-                    <span className="bg-cyan-950/40 text-cyan-400 text-[10px] font-bold font-mono py-0.5 px-2 rounded border border-cyan-900/30">
+                    <span className="bg-gray text-cyan-400 text-[10px] font-bold font-mono py-0.5 px-2 rounded border border-cyan-900/30">
                       {opp.workType}
                     </span>
                     <span className="text-[10px] text-slate-500">Deadline: {opp.deadline}</span>
@@ -240,7 +240,7 @@ export const BrowseOpportunities = () => {
                     <span className="text-slate-500 block text-[9px] uppercase font-mono">Engagement</span>
                     <span className="text-slate-800 dark:text-slate-200 font-bold">{opp.commitment}</span>
                   </div>
-                  <Link 
+                  <Link
                     to={`/opportunities/${opp.id}`}
                     className="bg-primary hover:bg-primary/95 text-white py-1.5 px-4 rounded-lg text-xs font-semibold transition cursor-pointer"
                   >
@@ -254,7 +254,7 @@ export const BrowseOpportunities = () => {
           /* List View Layout */
           <div className="space-y-4">
             {loadedOpportunities.map(opp => (
-              <div 
+              <div
                 key={opp.id}
                 className="glass-card rounded-2xl p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-indigo-500/35 hover:shadow-2xl hover:shadow-indigo-500/5 transition shadow-md"
               >
@@ -289,7 +289,7 @@ export const BrowseOpportunities = () => {
                     {opp.salaryRange && <p className="text-xs font-mono text-slate-800 dark:text-slate-200">{opp.salaryRange}</p>}
                     <p className="text-[10px] text-slate-500 mt-0.5">Deadline: {opp.deadline}</p>
                   </div>
-                  <Link 
+                  <Link
                     to={`/opportunities/${opp.id}`}
                     className="bg-primary hover:bg-primary/95 text-white py-2 px-4 rounded-lg text-xs font-semibold shrink-0 transition"
                   >
@@ -304,7 +304,7 @@ export const BrowseOpportunities = () => {
         {/* Real server-side pagination UI */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-12 pb-6">
-            <button 
+            <button
               disabled={page === 1}
               onClick={() => setPage(p => Math.max(1, p - 1))}
               className="px-3 py-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-700 dark:text-slate-300 disabled:text-slate-400 dark:disabled:text-slate-600 text-xs hover:bg-slate-200 dark:hover:bg-slate-800 transition disabled:hover:bg-slate-100 dark:disabled:hover:bg-slate-900 cursor-pointer"
@@ -320,7 +320,7 @@ export const BrowseOpportunities = () => {
                 {idx + 1}
               </button>
             ))}
-            <button 
+            <button
               disabled={page === totalPages}
               onClick={() => setPage(p => Math.min(totalPages, p + 1))}
               className="px-3 py-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-700 dark:text-slate-300 disabled:text-slate-400 dark:disabled:text-slate-600 text-xs hover:bg-slate-200 dark:hover:bg-slate-800 transition disabled:hover:bg-slate-100 dark:disabled:hover:bg-slate-900 cursor-pointer"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import {
@@ -24,6 +24,7 @@ import {
   UserSquare2,
   DollarSign,
   Trash2,
+  Edit2,
   UserCheck,
   Ban,
   ExternalLink,
@@ -114,6 +115,7 @@ export const Dashboard = () => {
   const [oppSalary, setOppSalary] = useState("");
   const [oppDescription, setOppDescription] = useState("");
   const [oppFormFeedback, setOppFormFeedback] = useState("");
+  const [editingOppId, setEditingOppId] = useState(null);
   const [profileSkills, setProfileSkills] = useState(currentUser?.skills?.join(", ") || "");
   const [profileBio, setProfileBio] = useState(currentUser?.bio || "");
   const [profileExperience, setProfileExperience] = useState(currentUser?.experience || "");
@@ -180,22 +182,51 @@ export const Dashboard = () => {
       setOppFormFeedback("Error: Complete all required job metrics.");
       return;
     }
-    addOpportunity({
-      startupId: myActiveStartup.id,
-      title: oppTitle,
-      skills: oppSkills.split(",").map((s) => s.trim()),
-      workType: oppWorkType,
-      commitment: oppCommitment,
-      deadline: oppDeadline,
-      salaryRange: oppSalary || "Equity Only",
-      description: oppDescription
-    });
-    setOppFormFeedback("Success: New Open Position was published instantly!");
+    if (editingOppId) {
+      updateOpportunity({
+        id: editingOppId,
+        startupId: myActiveStartup.id,
+        title: oppTitle,
+        skills: oppSkills.split(",").map((s) => s.trim()),
+        workType: oppWorkType,
+        commitment: oppCommitment,
+        deadline: oppDeadline,
+        salaryRange: oppSalary || "Equity Only",
+        description: oppDescription
+      });
+      setOppFormFeedback("Success: Open Position was updated!");
+      setEditingOppId(null);
+    } else {
+      addOpportunity({
+        startupId: myActiveStartup.id,
+        title: oppTitle,
+        skills: oppSkills.split(",").map((s) => s.trim()),
+        workType: oppWorkType,
+        commitment: oppCommitment,
+        deadline: oppDeadline,
+        salaryRange: oppSalary || "Equity Only",
+        description: oppDescription
+      });
+      setOppFormFeedback("Success: New Open Position was published instantly!");
+    }
     setOppTitle("");
     setOppSkills("");
     setOppDescription("");
     setOppSalary("");
   };
+  const handleEditOpportunity = (opp) => {
+    setEditingOppId(opp.id);
+    setOppTitle(opp.title);
+    setOppSkills(opp.skills.join(", "));
+    setOppWorkType(opp.workType);
+    setOppCommitment(opp.commitment);
+    setOppDeadline(opp.deadline);
+    setOppSalary(opp.salaryRange === "Equity Only" ? "" : opp.salaryRange);
+    setOppDescription(opp.description);
+    setOppFormFeedback("");
+    setActiveTab("add-opportunity");
+  };
+
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
     setProfileFormFeedback("");
@@ -464,7 +495,7 @@ export const Dashboard = () => {
           }
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
             <div className="glass-card rounded-2xl p-5 shadow-lg">
-              <h3 className="font-display font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider mb-4">Monthly Applicant Feed (Recharts)</h3>
+              <h3 className="font-display font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider mb-4">Monthly Applicant Feed</h3>
               <div className="h-64 text-slate-800 text-xs">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartsApplicationData}>
@@ -479,7 +510,7 @@ export const Dashboard = () => {
             </div>
 
             <div className="glass-card rounded-2xl p-5 shadow-lg">
-              <h3 className="font-display font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider mb-4">Team Size Expansion (Recharts)</h3>
+              <h3 className="font-display font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider mb-4">Team Size Expansion</h3>
               <div className="h-64 text-slate-800 text-xs">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={chartsTeamGrowthData}>
@@ -741,8 +772,24 @@ export const Dashboard = () => {
               type="submit"
               className="bg-primary hover:bg-primary/95 text-white font-bold py-2.5 px-6 rounded-lg float-right transition cursor-pointer"
             >
-              Post Position
+              {editingOppId ? "Update Position" : "Post Position"}
             </button>
+
+            {editingOppId && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEditingOppId(null);
+                  setOppTitle("");
+                  setOppSkills("");
+                  setOppDescription("");
+                  setOppSalary("");
+                }}
+                className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold py-2.5 px-6 rounded-lg float-right transition cursor-pointer mr-3"
+              >
+                Cancel Edit
+              </button>
+            )}
 
             <div className="clear-both" />
 
@@ -771,11 +818,20 @@ export const Dashboard = () => {
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-slate-850">
                 {myOpportunities.map((opp) => <tr key={opp.id} className="text-slate-700 dark:text-slate-300">
-                  <td className="py-3.5 font-bold text-slate-900 dark:text-white pr-2">{opp.title}</td>
+                  <td className="py-3.5 font-bold text-slate-900 dark:text-white pr-2 hover:underline">
+                    <Link to={`/opportunities/${opp.id}`}>{opp.title}</Link>
+                  </td>
                   <td className="py-3.5 font-mono"><span className="bg-slate-100 dark:bg-slate-950 text-cyan-600 dark:text-cyan-400 border border-slate-200 dark:border-slate-855 px-2 py-0.5 rounded text-[10px]">{opp.workType}</span></td>
                   <td className="py-3.5 text-slate-550 dark:text-slate-400">{opp.commitment}</td>
                   <td className="py-3.5 font-mono text-slate-500 dark:text-slate-400">{opp.deadline}</td>
-                  <td className="py-3.5 text-right">
+                  <td className="py-3.5 text-right space-x-3">
+                    <button
+                      onClick={() => handleEditOpportunity(opp)}
+                      className="text-indigo-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition"
+                      title="Edit Position"
+                    >
+                      <Edit2 size={16} className="inline" />
+                    </button>
                     <button
                       onClick={() => deleteOpportunity(opp.id)}
                       className="text-rose-500 hover:text-rose-450 dark:hover:text-slate-900 transition"
@@ -1068,7 +1124,7 @@ export const Dashboard = () => {
             <div className="glass-card rounded-xl p-5">
               <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">Combined Revenue</span>
               <span className="font-display font-extrabold text-2xl text-emerald-555 text-emerald-600 dark:text-emerald-400 mt-1 block">
-                ${payments.reduce((acc, curr) => acc + curr.amount, 0)} CAD
+                ${payments.reduce((acc, curr) => acc + curr.amount, 0)} USD
               </span>
               <span className="text-xxs text-slate-500 dark:text-slate-400 mt-1.5 block hover:underline cursor-pointer text-indigo-500 dark:text-indigo-400" onClick={() => setActiveTab("transactions")}>Bank ledger &gt;</span>
             </div>
@@ -1078,7 +1134,7 @@ export const Dashboard = () => {
             /* Mini chart visual for admin registries */
           }
           <div className="glass-card rounded-2xl p-6">
-            <h3 className="font-display font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider mb-4">Total Registry Proportions (Recharts)</h3>
+            <h3 className="font-display font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider mb-4">Total Registry Proportions</h3>
             <div className="h-64 text-slate-850 dark:text-slate-800 text-xs">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={adminStatsChartData}>

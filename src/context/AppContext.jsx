@@ -2,14 +2,14 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AppContext = createContext(undefined);
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://startup-forge-backend.vercel.app/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 export const AppProvider = ({ children }) => {
   // Theme state
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
     if (saved === 'light' || saved === 'dark') return saved;
-    return 'dark'; // Cosmic dark mode by default
+    return 'light'; // Light mode by default
   });
 
   // Global states
@@ -52,7 +52,8 @@ export const AppProvider = ({ children }) => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-        }
+        },
+        credentials: 'include'
       });
       const data = await res.json();
       if (data.success) {
@@ -185,7 +186,8 @@ export const AppProvider = ({ children }) => {
       const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
       });
       const data = await res.json();
       if (data.success) {
@@ -208,7 +210,8 @@ export const AppProvider = ({ children }) => {
       const res = await fetch(`${API_URL}/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name, image })
+        body: JSON.stringify({ email, name, image }),
+        credentials: 'include'
       });
       const data = await res.json();
       if (data.success) {
@@ -250,7 +253,8 @@ export const AppProvider = ({ children }) => {
           ...headers,
           'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
         },
-        body
+        body,
+        credentials: 'include'
       });
       const data = await res.json();
 
@@ -275,7 +279,8 @@ export const AppProvider = ({ children }) => {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-        }
+        },
+        credentials: 'include'
       });
     } catch (err) {
       console.error('Logout error:', err);
@@ -506,9 +511,11 @@ export const AppProvider = ({ children }) => {
         window.location.href = data.url;
       } else {
         addToast(data.message || 'Stripe payment gateway failed to load.', 'error');
+        throw new Error(data.message || 'Stripe payment gateway failed to load.');
       }
     } catch (err) {
       addToast('Network error contacting Stripe.', 'error');
+      throw err;
     }
   };
 

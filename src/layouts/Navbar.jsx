@@ -23,7 +23,8 @@ export const Navbar = () => {
     setCurrentUser,
     usersList,
     startups,
-    applications
+    applications,
+    logout
   } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
@@ -126,7 +127,7 @@ export const Navbar = () => {
     return location.pathname === path ? "text-primary dark:text-secondary font-semibold" : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-slate-900 transition-colors";
   };
   const handleLogout = () => {
-    setCurrentUser(null);
+    logout();
     navigate("/");
   };
   const handleImpersonate = (userId) => {

@@ -100,6 +100,26 @@ export const Payment = () => {
     }
   };
 
+  if (currentUser?.role === 'collaborator') {
+    return (
+      <div className="min-h-screen bg-transparent text-slate-800 dark:text-slate-200 py-12 px-4 flex flex-col justify-center items-center">
+        <div className="glass-card rounded-2xl p-10 text-center max-w-lg mx-auto shadow-xl space-y-4 border border-indigo-500/20">
+          <ShieldCheck className="w-12 h-12 text-indigo-500 mx-auto" />
+          <h2 className="font-display font-bold text-slate-900 dark:text-white text-xl">Restricted Access</h2>
+          <p className="text-xs text-slate-650 dark:text-slate-400">
+            Premium upgrades are exclusively available to Founder profiles. Your collaborator account cannot access this page.
+          </p>
+          <button
+            onClick={() => navigate("/")}
+            className="mt-4 bg-primary hover:bg-primary/95 text-white py-2 px-5 rounded-lg text-xs font-bold transition"
+          >
+            Return Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-transparent text-slate-800 dark:text-slate-200 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern flex flex-col justify-center items-center">
       <div className="max-w-4xl mx-auto w-full">
