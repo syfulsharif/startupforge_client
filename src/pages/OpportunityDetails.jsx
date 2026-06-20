@@ -8,12 +8,13 @@ import {
   ShieldAlert,
   CheckCircle,
   Clock,
-  Link2
+  Link2,
+  Loader2
 } from "lucide-react";
 export const OpportunityDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { opportunities, startups, currentUser, addApplication } = useApp();
+  const { opportunities, startups, currentUser, addApplication, authLoading } = useApp();
   const openOpp = opportunities.find((o) => o.id === id);
   const startup = openOpp ? startups.find((s) => s.id === openOpp.startupId) : null;
   const [showApplyModal, setShowApplyModal] = useState(false);
@@ -21,6 +22,14 @@ export const OpportunityDetails = () => {
   const [portfolio, setPortfolio] = useState("");
   const [customSkills, setCustomSkills] = useState("");
   const [successApply, setSuccessApply] = useState(false);
+
+  if (authLoading) {
+    return <div className="min-h-screen bg-transparent flex flex-col justify-center items-center py-20">
+      <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+      <p className="text-slate-600 dark:text-slate-400 font-medium text-xs">Loading role details...</p>
+    </div>;
+  }
+
   if (!openOpp || !startup) {
     return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20">
       <ShieldAlert className="w-16 h-16 text-rose-500 mb-4 animate-bounce" />

@@ -27,7 +27,10 @@ import {
   UserCheck,
   Ban,
   ExternalLink,
-  Crown
+  Crown,
+  Upload,
+  Link as LinkIcon,
+  Loader2
 } from "lucide-react";
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -48,7 +51,8 @@ export const Dashboard = () => {
     updateApplicationStatus,
     updateUserStatus,
     setUserPremium,
-    updateProfileCV
+    updateProfileCV,
+    authLoading
   } = useApp();
   const [activeTab, setActiveTab] = useState(() => {
     if (currentUser?.role === "founder") return "overview";
@@ -208,6 +212,13 @@ export const Dashboard = () => {
     { name: "Applicants", value: applications.length },
     { name: "Payments log", value: payments.length }
   ];
+
+  if (authLoading) {
+    return <div className="min-h-screen bg-transparent flex flex-col justify-center items-center py-20">
+      <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+      <p className="text-slate-600 dark:text-slate-400 font-medium text-xs">Loading dashboard data...</p>
+    </div>;
+  }
 
   if (!currentUser) {
     return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20 px-4 text-center">

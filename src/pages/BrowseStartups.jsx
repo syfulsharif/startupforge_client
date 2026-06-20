@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useApp } from "../context/AppContext";
-import { Search, MapPin, Building, Sparkles, ChevronRight } from "lucide-react";
+import { Search, MapPin, Building, Sparkles, ChevronRight, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 export const BrowseStartups = () => {
-  const { startups } = useApp();
+  const { startups, authLoading } = useApp();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState("All");
   const [selectedStage, setSelectedStage] = useState("All");
@@ -19,6 +19,13 @@ export const BrowseStartups = () => {
   return <div className="min-h-screen bg-transparent text-slate-850 dark:text-slate-150 py-12 px-4 sm:px-6 lg:px-8 bg-grid-pattern">
       <div className="max-w-7xl mx-auto">
         
+        {authLoading ? (
+          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+            <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+            <p className="text-slate-600 dark:text-slate-400 font-medium">Loading startups...</p>
+          </div>
+        ) : (
+          <>
         {
     /* Header Block */
   }
@@ -166,7 +173,9 @@ export const BrowseStartups = () => {
               <button disabled className="px-3 py-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 rounded text-slate-500 text-xs">Next</button>
             </div>
           </>}
-
+          </>
+        )}
       </div>
     </div>;
 };
+

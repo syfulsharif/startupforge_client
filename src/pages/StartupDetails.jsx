@@ -1,11 +1,19 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
-import { ArrowLeft, MapPin, Globe, Calendar, Briefcase, ShieldCheck, Sparkles, AlertCircle } from "lucide-react";
+import { ArrowLeft, MapPin, Globe, Calendar, Briefcase, ShieldCheck, Sparkles, AlertCircle, Loader2 } from "lucide-react";
 export const StartupDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { startups, opportunities, currentUser } = useApp();
+  const { startups, opportunities, currentUser, authLoading } = useApp();
   const startup = startups.find((s) => s.id === id);
+  
+  if (authLoading) {
+    return <div className="min-h-screen bg-transparent flex flex-col justify-center items-center py-20">
+      <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+      <p className="text-slate-600 dark:text-slate-400 font-medium text-xs">Loading startup details...</p>
+    </div>;
+  }
+
   if (!startup) {
     return <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col justify-center items-center py-20">
         <AlertCircle className="w-16 h-16 text-rose-500 mb-4" />
