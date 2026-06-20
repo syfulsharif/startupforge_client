@@ -118,6 +118,20 @@ export const Dashboard = () => {
   const [profileBio, setProfileBio] = useState(currentUser?.bio || "");
   const [profileExperience, setProfileExperience] = useState(currentUser?.experience || "");
   const [profileFormFeedback, setProfileFormFeedback] = useState("");
+  useEffect(() => {
+    if (myActiveStartup) {
+      setStartupName(myActiveStartup.name);
+      setStartupLogo(myActiveStartup.logo);
+      setStartupIndustry(myActiveStartup.industry);
+      setStartupStage(myActiveStartup.fundingStage);
+      setStartupLocation(myActiveStartup.location);
+      setStartupWebsite(myActiveStartup.website);
+      setStartupPitch(myActiveStartup.pitch);
+      setStartupDescription(myActiveStartup.description);
+      setStartupTeamSize(myActiveStartup.teamSizeNeeded || 1);
+    }
+  }, [myActiveStartup]);
+
   const handleStartupSubmit = (e) => {
     e.preventDefault();
     setStartupFormFeedback("");
