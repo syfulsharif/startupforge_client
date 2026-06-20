@@ -21,7 +21,8 @@ export const Profile = () => {
     const formData = new FormData();
     formData.append("image", file);
     try {
-      const response = await fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, {
+      const imgbbKey = import.meta.env.VITE_IMGBB_API_KEY || '40fc352c6909e2cee7457e65b91131f8';
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
         method: "POST",
         body: formData,
       });
