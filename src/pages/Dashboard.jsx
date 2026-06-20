@@ -104,6 +104,7 @@ export const Dashboard = () => {
   const [startupLocation, setStartupLocation] = useState(myActiveStartup ? myActiveStartup.location : "Remote");
   const [startupWebsite, setStartupWebsite] = useState(myActiveStartup ? myActiveStartup.website : "https://");
   const [startupPitch, setStartupPitch] = useState(myActiveStartup ? myActiveStartup.pitch : "");
+  const [startupTeamSize, setStartupTeamSize] = useState(myActiveStartup ? myActiveStartup.teamSizeNeeded || 1 : 1);
   const [startupFormFeedback, setStartupFormFeedback] = useState("");
   const [oppTitle, setOppTitle] = useState("");
   const [oppSkills, setOppSkills] = useState("");
@@ -134,7 +135,8 @@ export const Dashboard = () => {
         fundingStage: startupStage,
         location: startupLocation,
         website: startupWebsite,
-        pitch: startupPitch
+        pitch: startupPitch,
+        teamSizeNeeded: Number(startupTeamSize)
       };
       updateStartup(updated);
       setStartupFormFeedback("Success: Startup information updated.");
@@ -147,7 +149,8 @@ export const Dashboard = () => {
         fundingStage: startupStage,
         location: startupLocation,
         website: startupWebsite,
-        pitch: startupPitch
+        pitch: startupPitch,
+        teamSizeNeeded: Number(startupTeamSize)
       });
       setStartupFormFeedback("Success: Startup created under review badge.");
     }
@@ -536,7 +539,7 @@ export const Dashboard = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
                 <label className="font-semibold text-slate-700 dark:text-slate-400">Funding Stage</label>
                 <select
@@ -557,6 +560,17 @@ export const Dashboard = () => {
                   value={startupLocation}
                   onChange={(e) => setStartupLocation(e.target.value)}
                   placeholder="e.g. Hybrid, Remote, SF"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="font-semibold text-slate-700 dark:text-slate-400">Team Size Needed</label>
+                <input
+                  type="number"
+                  min="1"
+                  required
+                  value={startupTeamSize}
+                  onChange={(e) => setStartupTeamSize(e.target.value)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
                 />
               </div>
