@@ -177,13 +177,19 @@ export const Payment = () => {
                 </p>
 
                 <div className="pt-2">
+                  {currentUser?.isPremium && (
+                    <div className="bg-emerald-500/10 border border-emerald-500/25 p-3 rounded-lg text-xs text-emerald-500 font-bold mb-3 text-center">
+                      <ShieldCheck size={16} className="inline mr-1" />
+                      Your account is already upgraded to Premium!
+                    </div>
+                  )}
                   <button
                     type="submit"
-                    disabled={loading || !currentUser}
+                    disabled={loading || !currentUser || currentUser?.isPremium}
                     className="w-full bg-gradient-to-tr from-amber-500 to-orange-500 hover:brightness-110 disabled:opacity-40 text-slate-950 font-black py-3 rounded-lg text-xs transition flex items-center justify-center gap-1 border-0 cursor-pointer"
                   >
                     <Flame size={14} className="fill-slate-950" />
-                    <span>Checkout on Stripe ($ {selectedPlanPrice})</span>
+                    <span>{currentUser?.isPremium ? "Already Premium" : `Checkout on Stripe ($ ${selectedPlanPrice})`}</span>
                   </button>
                 </div>
 
