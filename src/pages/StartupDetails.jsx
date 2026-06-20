@@ -190,7 +190,7 @@ export const StartupDetails = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-500">Target Hires</span>
-                  <span className="text-slate-800 dark:text-slate-200 font-bold">{startup.teamSizeNeeded} collaborators</span>
+                  <span className="text-slate-800 dark:text-slate-200 font-bold">{startup.teamSizeNeeded || 1} collaborators</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-500">Verification</span>

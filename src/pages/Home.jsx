@@ -242,7 +242,7 @@ export const Home = () => {
             </div>
             <div>
               <span className="text-slate-500 block text-right">Seeking</span>
-              <span className="text-indigo-400 font-bold">{startup.teamSizeNeeded} team members</span>
+              <span className="text-indigo-400 font-bold">{startup.teamSizeNeeded || 1} team members</span>
             </div>
           </div>
           <Link

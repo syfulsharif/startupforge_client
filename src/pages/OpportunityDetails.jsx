@@ -110,7 +110,7 @@ export const OpportunityDetails = () => {
           </div>
           <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-200 dark:border-slate-850">
             <span className="text-slate-500 uppercase text-[9px] font-mono block mb-1">Team Size Needed</span>
-            <span className="text-slate-900 dark:text-white font-bold">{startup.teamSizeNeeded} collaborators</span>
+            <span className="text-slate-900 dark:text-white font-bold">{startup.teamSizeNeeded || 1} collaborators</span>
           </div>
           <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-200 dark:border-slate-850">
             <span className="text-slate-500 uppercase text-[9px] font-mono block mb-1">Application Deadline</span>

@@ -150,7 +150,7 @@ export const BrowseStartups = () => {
                     </div>
                     <div className="text-right">
                       <span className="text-slate-500 block text-[10px] uppercase font-mono">Recruits</span>
-                      <span className="text-indigo-400 font-bold text-xs">{startup.teamSizeNeeded} collaborators</span>
+                      <span className="text-indigo-400 font-bold text-xs">{startup.teamSizeNeeded || 1} collaborators</span>
                     </div>
                   </div>
                   <Link
