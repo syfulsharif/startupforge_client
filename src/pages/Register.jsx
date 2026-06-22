@@ -109,17 +109,17 @@ export const Register = () => {
             <label className="text-slate-700 dark:text-slate-330 font-semibold block">Account Purpose (Your Platform Role)</label>
             <div className="grid grid-cols-2 gap-3">
               <button
-    type="button"
-    onClick={() => setRole("collaborator")}
-    className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "collaborator" ? "bg-primary/10 border-primary text-white" : "bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-850 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900"}`}
-  >
+                type="button"
+                onClick={() => setRole("collaborator")}
+                className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "collaborator" ? "bg-primary border-primary text-white shadow-md" : "bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"}`}
+              >
                 Collaborator / Builder
               </button>
               <button
-    type="button"
-    onClick={() => setRole("founder")}
-    className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "founder" ? "bg-primary/10 border-primary text-white" : "bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-850 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900"}`}
-  >
+                type="button"
+                onClick={() => setRole("founder")}
+                className={`py-2 px-3.5 border rounded-lg text-center font-bold font-sans transition ${role === "founder" ? "bg-primary border-primary text-white shadow-md" : "bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"}`}
+              >
                 Startup Founder / Initiator
               </button>
             </div>

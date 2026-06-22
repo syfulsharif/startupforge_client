@@ -13,9 +13,12 @@ import { Dashboard } from "./pages/Dashboard";
 import { Profile } from "./pages/Profile";
 import { Payment } from "./pages/Payment";
 import { NotFound } from "./pages/NotFound";
+import { GlobalLoader } from "./layouts/GlobalLoader";
+
 export default function App() {
   return <AppProvider>
       <Router>
+        <GlobalLoader />
         <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 relative overflow-hidden">
           
           {
