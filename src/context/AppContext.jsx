@@ -1,14 +1,17 @@
+"use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AppContext = createContext(undefined);
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.VITE_API_URL || 'http://localhost:5000/api';
 
 export const AppProvider = ({ children }) => {
   // Theme state
   const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light' || saved === 'dark') return saved;
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+    }
     return 'light'; // Light mode by default
   });
 

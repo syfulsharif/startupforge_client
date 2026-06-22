@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Sparkles, Mail, MapPin, Phone, Github, Twitter, Linkedin, Heart } from "lucide-react";
 export const Footer = () => {
   return <footer className="bg-slate-150 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 py-12 px-4 sm:px-6 lg:px-8 mt-auto">
@@ -8,7 +8,7 @@ export const Footer = () => {
         /* Brand segment */
       }
       <div className="flex flex-col gap-4">
-        <Link to="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold">
             <Sparkles size={16} />
           </div>
@@ -34,10 +34,10 @@ export const Footer = () => {
           Platform Pages
         </h3>
         <ul className="space-y-2 text-xs">
-          <li><Link to="/" className="hover:text-slate-950 dark:hover:text-white transition-colors">Home Landing</Link></li>
-          <li><Link to="/startups" className="hover:text-slate-950 dark:hover:text-white transition-colors">Browse Startups</Link></li>
-          <li><Link to="/opportunities" className="hover:text-slate-950 dark:hover:text-white transition-colors">Assemble Collaborators</Link></li>
-          <li><Link to="/payment" className="hover:text-amber-400 transition-colors flex items-center gap-1">Upgrade to Premium</Link></li>
+          <li><Link href="/" className="hover:text-slate-950 dark:hover:text-white transition-colors">Home Landing</Link></li>
+          <li><Link href="/startups" className="hover:text-slate-950 dark:hover:text-white transition-colors">Browse Startups</Link></li>
+          <li><Link href="/opportunities" className="hover:text-slate-950 dark:hover:text-white transition-colors">Assemble Collaborators</Link></li>
+          <li><Link href="/payment" className="hover:text-amber-400 transition-colors flex items-center gap-1">Upgrade to Premium</Link></li>
         </ul>
       </div>
 

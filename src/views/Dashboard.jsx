@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "../context/AppContext";
 import {
   ResponsiveContainer,
@@ -34,7 +35,7 @@ import {
   Loader2
 } from "lucide-react";
 export const Dashboard = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const {
     currentUser,
     startups,
@@ -79,7 +80,7 @@ export const Dashboard = () => {
     const formData = new FormData();
     formData.append("image", file);
     try {
-      const imgbbKey = import.meta.env.VITE_IMGBB_API_KEY || '40fc352c6909e2cee7457e65b91131f8';
+      const imgbbKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || process.env.VITE_IMGBB_API_KEY || '40fc352c6909e2cee7457e65b91131f8';
       const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
         method: "POST",
         body: formData,
@@ -272,8 +273,8 @@ export const Dashboard = () => {
       <h2 className="font-display font-bold text-2xl">Sandbox Session Logged Out</h2>
       <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 max-w-sm">No active actor is logged in. Use the top bar switcher or log in manually.</p>
       <div className="mt-6 flex gap-3">
-        <Link to="/login" className="bg-primary text-white py-2 px-5 rounded-lg text-xs font-semibold">Login Portal</Link>
-        <Link to="/" className="bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 py-2 px-5 rounded-lg text-xs font-semibold">Back Home</Link>
+        <Link href="/login" className="bg-primary text-white py-2 px-5 rounded-lg text-xs font-semibold">Login Portal</Link>
+        <Link href="/" className="bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 py-2 px-5 rounded-lg text-xs font-semibold">Back Home</Link>
       </div>
     </div>;
   }
@@ -411,7 +412,7 @@ export const Dashboard = () => {
             <>
               <span className="text-[9px] uppercase font-mono text-slate-500 block px-3 mb-1">PROMOTIONAL OFFER</span>
               <Link
-                to="/payment"
+                href="/payment"
                 className="px-3 py-2 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/20 hover:bg-amber-500/25 transition flex items-center gap-1.5 font-bold text-xxs block"
               >
                 <Crown size={12} className="shrink-0" />
@@ -816,7 +817,7 @@ export const Dashboard = () => {
               <tbody className="divide-y divide-slate-200 dark:divide-slate-850">
                 {myOpportunities.map((opp) => <tr key={opp.id} className="text-slate-700 dark:text-slate-300">
                   <td className="py-3.5 font-bold text-slate-900 dark:text-white pr-2 hover:underline">
-                    <Link to={`/opportunities/${opp.id}`}>{opp.title}</Link>
+                    <Link href={`/opportunities/${opp.id}`}>{opp.title}</Link>
                   </td>
                   <td className="py-3.5 font-mono"><span className="bg-slate-100 dark:bg-slate-950 text-cyan-600 dark:text-cyan-400 border border-slate-200 dark:border-slate-855 px-2 py-0.5 rounded text-[10px]">{opp.workType}</span></td>
                   <td className="py-3.5 text-slate-550 dark:text-slate-400">{opp.commitment}</td>
@@ -986,7 +987,7 @@ export const Dashboard = () => {
 
           {myCollaboratorApplications.length === 0 ? <div className="text-center py-12 text-slate-500 dark:text-slate-400 text-xs space-y-4">
             <p>You haven't applied to any startup squads yet. Connect now!</p>
-            <Link to="/opportunities" className="bg-primary text-white py-2 px-4 rounded font-bold text-xxs inline-block">Browse Opportunities</Link>
+            <Link href="/opportunities" className="bg-primary text-white py-2 px-4 rounded font-bold text-xxs inline-block">Browse Opportunities</Link>
           </div> : <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
@@ -1002,7 +1003,7 @@ export const Dashboard = () => {
                 {myCollaboratorApplications.map((app) => <tr key={app.id} className="text-slate-700 dark:text-slate-300">
                   <td className="py-3.5 pr-3">
                     <span className="font-bold text-slate-900 dark:text-white hover:underline block truncate max-w-[150px]">
-                      <Link to={`/startups/${app.startupId}`}>{app.startupName}</Link>
+                      <Link href={`/startups/${app.startupId}`}>{app.startupName}</Link>
                     </span>
                   </td>
                   <td className="py-3.5 font-semibold text-slate-700 dark:text-slate-300 pr-2">{app.opportunityTitle}</td>

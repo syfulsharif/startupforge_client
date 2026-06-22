@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "../context/AppContext";
 import { Eye, EyeOff, Check, X, Camera, Sparkles } from "lucide-react";
 export const Register = () => {
   const { register } = useApp();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +43,7 @@ export const Register = () => {
     const res = await register(name, email, password, role, avatar);
     setLoading(false);
     if (res.success) {
-      navigate("/dashboard");
+      router.push("/dashboard");
     }
   };
   const getStrengthLabel = () => {
@@ -191,7 +192,7 @@ export const Register = () => {
 
         <div className="border-t border-slate-200 dark:border-slate-800 mt-6 pt-5 flex justify-center text-xxs text-slate-500 dark:text-slate-455 dark:text-slate-450 gap-1 select-none">
           <span>Already registered?</span>
-          <Link to="/login" className="text-cyan-500 dark:text-cyan-400 hover:underline">Sign In portal &gt;</Link>
+          <Link href="/login" className="text-cyan-500 dark:text-cyan-400 hover:underline">Sign In portal &gt;</Link>
         </div>
 
       </div>

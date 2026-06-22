@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import {
   Check,
   Crown,
@@ -13,8 +14,8 @@ import {
 } from "lucide-react";
 
 export const Payment = () => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { currentUser, addPayment, verifyPaymentSession, addToast, setUserPremium } = useApp();
 
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -73,14 +74,14 @@ export const Payment = () => {
       verifySession();
     } else if (canceled) {
       addToast("Subscription checkout cancelled. You have not been charged.", "info");
-      navigate("/payment", { replace: true });
+      router.replace("/payment");
     }
   }, [searchParams]);
 
   const handleProcessUpgrade = async (e) => {
     e.preventDefault();
     if (!currentUser) {
-      navigate("/login", { state: { from: "/payment" } });
+      router.push("/login?from=/payment");
       return;
     }
     setLoading(true);
@@ -110,7 +111,7 @@ export const Payment = () => {
             Premium upgrades are exclusively available to Founder profiles. Your collaborator account cannot access this page.
           </p>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => router.push("/")}
             className="mt-4 bg-primary hover:bg-primary/95 text-white py-2 px-5 rounded-lg text-xs font-bold transition"
           >
             Return Home
@@ -140,7 +141,7 @@ export const Payment = () => {
             <p className="font-bold text-slate-900 dark:text-white text-base">Transaction Error</p>
             <p className="text-xs text-slate-650 dark:text-slate-400">{paymentError}</p>
             <button
-              onClick={() => { setPaymentError(""); navigate("/payment", { replace: true }); }}
+              onClick={() => { setPaymentError(""); router.replace("/payment"); }}
               className="mt-2 text-xs bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg transition"
             >
               Back to Payment Upgrades
@@ -289,14 +290,14 @@ export const Payment = () => {
 
             <div className="pt-4 flex flex-col gap-2 max-w-xs mx-auto text-xs">
               <Link
-                to="/dashboard"
+                href="/dashboard"
                 className="bg-primary hover:bg-primary/95 text-white py-2.5 px-6 rounded-lg font-bold flex items-center justify-center gap-1 shadow-lg shadow-primary/20"
               >
                 <span>Navigate to Workspace Dashboard</span>
                 <ArrowRight size={14} />
               </Link>
               <Link
-                to="/"
+                href="/"
                 className="text-slate-400 hover:text-slate-300 text-xxs block font-semibold uppercase mt-1 cursor-pointer"
               >
                 Back to main home

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Search, Briefcase, Grid, List, ArrowDownWideNarrow, Sparkles } from 'lucide-react';
 
 export const BrowseOpportunities = () => {
@@ -218,7 +218,7 @@ export const BrowseOpportunities = () => {
                     {opp.title}
                   </h3>
                   <p className="text-xs text-slate-650 dark:text-slate-400 mt-1 hover:underline">
-                    <Link to={`/startups/${opp.startupId}`}>{opp.startupName}</Link>
+                    <Link href={`/startups/${opp.startupId}`}>{opp.startupName}</Link>
                   </p>
 
                   <p className="text-xs text-slate-650 dark:text-slate-400 mt-4 line-clamp-3 leading-relaxed">
@@ -241,7 +241,7 @@ export const BrowseOpportunities = () => {
                     <span className="text-slate-800 dark:text-slate-200 font-bold">{opp.commitment}</span>
                   </div>
                   <Link
-                    to={`/opportunities/${opp.id}`}
+                    href={`/opportunities/${opp.id}`}
                     className="bg-primary hover:bg-primary/95 text-white py-1.5 px-4 rounded-lg text-xs font-semibold transition cursor-pointer"
                   >
                     View & Apply
@@ -261,7 +261,7 @@ export const BrowseOpportunities = () => {
                 <div className="space-y-1.5">
                   <div className="flex flex-wrap items-center gap-2">
                     <h3 className="font-display font-bold text-base text-slate-900 dark:text-white">
-                      <Link to={`/opportunities/${opp.id}`} className="hover:text-primary transition-colors">{opp.title}</Link>
+                      <Link href={`/opportunities/${opp.id}`} className="hover:text-primary transition-colors">{opp.title}</Link>
                     </h3>
                     <span className="bg-cyan-950/40 text-cyan-400 text-[9px] font-bold py-0.5 px-1.5 rounded font-mono border border-cyan-800/20">
                       {opp.workType}
@@ -272,7 +272,7 @@ export const BrowseOpportunities = () => {
                   </div>
 
                   <p className="text-xs text-slate-650 dark:text-slate-400">
-                    Proposed by <span className="text-slate-800 dark:text-slate-350 hover:underline"><Link to={`/startups/${opp.startupId}`}>{opp.startupName}</Link></span>
+                    Proposed by <span className="text-slate-800 dark:text-slate-350 hover:underline"><Link href={`/startups/${opp.startupId}`}>{opp.startupName}</Link></span>
                   </p>
 
                   <div className="flex flex-wrap gap-1 mt-1">
@@ -290,7 +290,7 @@ export const BrowseOpportunities = () => {
                     <p className="text-[10px] text-slate-500 mt-0.5">Deadline: {opp.deadline}</p>
                   </div>
                   <Link
-                    to={`/opportunities/${opp.id}`}
+                    href={`/opportunities/${opp.id}`}
                     className="bg-primary hover:bg-primary/95 text-white py-2 px-4 rounded-lg text-xs font-semibold shrink-0 transition"
                   >
                     View Details

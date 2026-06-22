@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "../context/AppContext";
 import {
   Sun,
@@ -26,8 +27,8 @@ export const Navbar = () => {
     applications,
     logout
   } = useApp();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showImpersonateDrop, setShowImpersonateDrop] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -124,18 +125,18 @@ export const Navbar = () => {
   const notifications = getNotifications();
 
   const activeLink = (path) => {
-    return location.pathname === path ? "text-primary dark:text-secondary font-semibold" : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors";
+    return pathname === path ? "text-primary dark:text-secondary font-semibold" : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors";
   };
   const handleLogout = () => {
     logout();
-    navigate("/");
+    router.push("/");
   };
   const handleImpersonate = (userId) => {
     const targetUser = usersList.find((u) => u.id === userId);
     if (targetUser) {
       setCurrentUser(targetUser);
       setShowImpersonateDrop(false);
-      navigate("/dashboard");
+      router.push("/dashboard");
     }
   };
   const getRoleBadge = (role) => {
@@ -155,7 +156,7 @@ export const Navbar = () => {
           {
     /* Logo */
   }
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
@@ -168,9 +169,9 @@ export const Navbar = () => {
     /* Desktop Navigation */
   }
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className={activeLink("/")}>Home</Link>
-            <Link to="/startups" className={activeLink("/startups")}>Startups</Link>
-            <Link to="/opportunities" className={activeLink("/opportunities")}>Opportunities</Link>
+            <Link href="/" className={activeLink("/")}>Home</Link>
+            <Link href="/startups" className={activeLink("/startups")}>Startups</Link>
+            <Link href="/opportunities" className={activeLink("/opportunities")}>Opportunities</Link>
           </nav>
 
           {
@@ -241,7 +242,7 @@ export const Navbar = () => {
                 {
     /* Premium Badge */
   }
-                {currentUser.isPremium && <Link to="/payment" className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1 py-1 px-2.5 rounded-full text-xs font-semibold tracking-wide transition-colors">
+                {currentUser.isPremium && <Link href="/payment" className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1 py-1 px-2.5 rounded-full text-xs font-semibold tracking-wide transition-colors">
                     <Gem size={12} />
                     <span>Premium</span>
                   </Link>}
@@ -250,7 +251,7 @@ export const Navbar = () => {
     /* Avatar drop */
   }
                 <div className="flex items-center gap-2">
-                  <Link to="/profile">
+                  <Link href="/profile">
                     <img
     src={currentUser.avatar}
     alt={currentUser.name}
@@ -265,7 +266,7 @@ export const Navbar = () => {
                         {currentUser.role}
                       </span>
                     </div>
-                    <Link to="/dashboard" className="text-[10px] text-indigo-500 hover:underline flex items-center gap-0.5">
+                    <Link href="/dashboard" className="text-[10px] text-indigo-500 hover:underline flex items-center gap-0.5">
                       <LayoutDashboard size={10} />
                       Dashboard
                     </Link>
@@ -280,10 +281,10 @@ export const Navbar = () => {
                   <LogOut className="w-5 h-5" />
                 </button>
               </div> : <div className="flex items-center gap-3">
-                <Link to="/login" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white py-2 px-3 transition-colors">
+                <Link href="/login" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white py-2 px-3 transition-colors">
                   Login
                 </Link>
-                <Link to="/register" className="bg-primary hover:bg-primary/95 text-white text-sm font-medium py-2 px-4 rounded-lg shadow-md hover:shadow-primary/20 transition-all">
+                <Link href="/register" className="bg-primary hover:bg-primary/95 text-white text-sm font-medium py-2 px-4 rounded-lg shadow-md hover:shadow-primary/20 transition-all">
                   Register
                 </Link>
               </div>}
@@ -320,9 +321,9 @@ export const Navbar = () => {
     className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800"
   >
               <div className="px-4 py-3 flex flex-col gap-3">
-                <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-sm py-1 font-medium">Home</Link>
-                <Link to="/startups" onClick={() => setMobileMenuOpen(false)} className="text-sm py-1 font-medium">Startups</Link>
-                <Link to="/opportunities" onClick={() => setMobileMenuOpen(false)} className="text-sm py-1 font-medium">Opportunities</Link>
+                <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-sm py-1 font-medium">Home</Link>
+                <Link href="/startups" onClick={() => setMobileMenuOpen(false)} className="text-sm py-1 font-medium">Startups</Link>
+                <Link href="/opportunities" onClick={() => setMobileMenuOpen(false)} className="text-sm py-1 font-medium">Opportunities</Link>
               </div>
               
               <div className="px-4 py-4 flex flex-col gap-3">
@@ -339,11 +340,11 @@ export const Navbar = () => {
                         <p className="text-xs text-slate-400 capitalize">{currentUser.role} Account</p>
                       </div>
                     </div>
-                    <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-sm text-indigo-500 py-1.5 font-medium">
+                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-sm text-indigo-500 py-1.5 font-medium">
                       <LayoutDashboard size={16} />
                       Go to Dashboard
                     </Link>
-                    <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 py-1.5 font-medium">
+                    <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 py-1.5 font-medium">
                       <User size={16} />
                       My Profile
                     </Link>
@@ -358,10 +359,10 @@ export const Navbar = () => {
                       Sign Out
                     </button>
                   </> : <div className="grid grid-cols-2 gap-3 pt-2">
-                    <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-center py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm text-slate-700 dark:text-slate-300">
+                    <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="text-center py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm text-slate-700 dark:text-slate-300">
                       Login
                     </Link>
-                    <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="text-center py-2 bg-primary text-white rounded-lg text-sm font-medium">
+                    <Link href="/register" onClick={() => setMobileMenuOpen(false)} className="text-center py-2 bg-primary text-white rounded-lg text-sm font-medium">
                       Register
                     </Link>
                   </div>}

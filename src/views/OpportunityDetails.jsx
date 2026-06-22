@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "../context/AppContext";
 import {
   ArrowLeft,
@@ -13,7 +14,7 @@ import {
 } from "lucide-react";
 export const OpportunityDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const { opportunities, startups, currentUser, addApplication, authLoading } = useApp();
   const openOpp = opportunities.find((o) => o.id === id);
   const startup = openOpp ? startups.find((s) => s.id === openOpp.startupId) : null;
@@ -35,13 +36,13 @@ export const OpportunityDetails = () => {
       <ShieldAlert className="w-16 h-16 text-rose-500 mb-4 animate-bounce" />
       <h2 className="font-display font-bold text-2xl">Role Not Found</h2>
       <p className="text-xs text-slate-650 dark:text-slate-400 mt-2">The open position might be filled or has expired.</p>
-      <Link to="/opportunities" className="mt-6 bg-primary text-white py-2 px-4 rounded text-xs">Back to List</Link>
+      <Link href="/opportunities" className="mt-6 bg-primary text-white py-2 px-4 rounded text-xs">Back to List</Link>
     </div>;
   }
   const handleApplySubmit = (e) => {
     e.preventDefault();
     if (!currentUser) {
-      navigate("/login", { state: { from: `/opportunities/${id}` } });
+      router.push("/login?from=" + encodeURIComponent(`/opportunities/${id}`));
       return;
     }
     addApplication({
@@ -64,7 +65,7 @@ export const OpportunityDetails = () => {
         /* Navigation Link Back */
       }
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => router.back()}
         className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white mb-8 group cursor-pointer"
       >
         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
@@ -85,7 +86,7 @@ export const OpportunityDetails = () => {
             </h1>
 
             <p className="text-sm text-slate-700 dark:text-slate-300 mt-1">
-              Startup Proposal: <Link to={`/startups/${startup.id}`} className="text-secondary hover:underline font-semibold">{openOpp.startupName}</Link>
+              Startup Proposal: <Link href={`/startups/${startup.id}`} className="text-secondary hover:underline font-semibold">{openOpp.startupName}</Link>
             </p>
           </div>
 
@@ -171,7 +172,7 @@ export const OpportunityDetails = () => {
                 <strong>Logged Out Mode:</strong> You must create or switch profiles to send an application to this company.
               </div>
               <Link
-                to="/login"
+                href="/login"
                 className="w-full text-center bg-primary hover:bg-primary/95 text-white py-2.5 rounded-lg text-xs font-semibold transition block"
               >
                 Login to Apply
@@ -196,7 +197,7 @@ export const OpportunityDetails = () => {
             <p className="text-slate-650 dark:text-slate-400 text-xxs line-clamp-4 leading-relaxed">
               {startup.pitch}
             </p>
-            <Link to={`/startups/${startup.id}`} className="text-indigo-600 dark:text-indigo-400 hover:underline text-xxs font-bold mt-2.5 block">
+            <Link href={`/startups/${startup.id}`} className="text-indigo-600 dark:text-indigo-400 hover:underline text-xxs font-bold mt-2.5 block">
               View detailed Pitch slide &gt;
             </Link>
           </div>
@@ -309,7 +310,7 @@ export const OpportunityDetails = () => {
 
           <div className="pt-4 flex flex-col gap-2 max-w-xs mx-auto">
             <Link
-              to="/dashboard"
+              href="/dashboard"
               onClick={() => setShowApplyModal(false)}
               className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-750 text-slate-800 dark:text-white text-xs py-2 px-4 rounded-lg font-semibold block text-center"
             >

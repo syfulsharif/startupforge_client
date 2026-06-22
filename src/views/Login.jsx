@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "../context/AppContext";
 import {
   Key,
@@ -11,14 +12,14 @@ import {
 } from "lucide-react";
 export const Login = () => {
   const { login } = useApp();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const from = location.state?.from || "/dashboard";
+  const from = searchParams.get("from") || "/dashboard";
   const handleManualLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -30,7 +31,7 @@ export const Login = () => {
     const res = await login(email, password);
     setLoading(false);
     if (res.success) {
-      navigate(from, { replace: true });
+      router.replace(from);
     } else {
       setErrorMessage(res.message || "Credentials rejected. Invalid email or password.");
     }
@@ -124,7 +125,7 @@ export const Login = () => {
 
         <div className="border-t border-slate-200 dark:border-slate-800 bg-transparent mt-6 pt-5 flex justify-center text-xxs text-slate-500 dark:text-slate-450 gap-1.5 select-none">
           <span>New to group team building on StartupForge?</span>
-          <Link to="/register" className="text-indigo-500 dark:text-indigo-400 hover:underline font-semibold">Create account &gt;</Link>
+          <Link href="/register" className="text-indigo-500 dark:text-indigo-400 hover:underline font-semibold">Create account &gt;</Link>
         </div>
 
       </div>

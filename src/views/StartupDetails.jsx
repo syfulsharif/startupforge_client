@@ -1,9 +1,10 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "../context/AppContext";
 import { ArrowLeft, MapPin, Globe, Calendar, Briefcase, ShieldCheck, Sparkles, AlertCircle, Loader2 } from "lucide-react";
 export const StartupDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const { startups, opportunities, currentUser, authLoading } = useApp();
   const startup = startups.find((s) => s.id === id);
   
@@ -19,7 +20,7 @@ export const StartupDetails = () => {
         <AlertCircle className="w-16 h-16 text-rose-500 mb-4" />
         <h2 className="font-display font-bold text-2xl">Startup Not Found</h2>
         <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">The company record may have been removed or is pending approval.</p>
-        <Link to="/startups" className="mt-6 bg-primary text-white py-2 px-4 rounded text-xs">Back to List</Link>
+        <Link href="/startups" className="mt-6 bg-primary text-white py-2 px-4 rounded text-xs">Back to List</Link>
       </div>;
   }
   const relatedOpp = opportunities.filter((o) => o.startupId === startup.id);
@@ -30,7 +31,7 @@ export const StartupDetails = () => {
     /* Back Link */
   }
         <button
-    onClick={() => navigate(-1)}
+    onClick={() => router.back()}
     className="inline-flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white mb-8 group"
   >
           <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
@@ -137,7 +138,7 @@ export const StartupDetails = () => {
                 </div> : <div className="divide-y divide-slate-200 dark:divide-slate-850">
                   {relatedOpp.map((opp) => <div key={opp.id} className="py-4 first:pt-0 last:pb-0 flex justify-between items-center gap-4">
                       <div className="min-w-0">
-                        <Link to={`/opportunities/${opp.id}`} className="font-bold text-sm text-slate-800 dark:text-slate-200 hover:text-indigo-650 dark:hover:text-white truncate block">
+                        <Link href={`/opportunities/${opp.id}`} className="font-bold text-sm text-slate-800 dark:text-slate-200 hover:text-indigo-650 dark:hover:text-white truncate block">
                            {opp.title}
                         </Link>
                         <div className="flex flex-wrap gap-2 items-center text-[10px] text-slate-600 dark:text-slate-400 mt-1">
@@ -149,7 +150,7 @@ export const StartupDetails = () => {
                         </div>
                       </div>
                       <Link
-    to={`/opportunities/${opp.id}`}
+    href={`/opportunities/${opp.id}`}
     className="bg-primary hover:bg-primary/95 text-white py-1.5 px-3.5 rounded-md text-xs font-semibold whitespace-nowrap transition cursor-pointer"
   >
                         Details

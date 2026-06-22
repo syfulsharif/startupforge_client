@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useApp } from "../context/AppContext";
 import { Search, MapPin, Building, Sparkles, ChevronRight, Loader2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 export const BrowseStartups = () => {
   const { startups, authLoading } = useApp();
   const [searchTerm, setSearchTerm] = useState("");
@@ -123,7 +123,7 @@ export const BrowseStartups = () => {
                     </span>
                     <div className="min-w-0">
                       <h3 className="font-display font-black text-lg text-slate-900 dark:text-white truncate hover:text-indigo-400">
-                        <Link to={`/startups/${startup.id}`}>{startup.name}</Link>
+                        <Link href={`/startups/${startup.id}`}>{startup.name}</Link>
                       </h3>
                       <p className="text-xs text-slate-450 flex items-center gap-1.5 mt-0.5 font-sans">
                         <span>{startup.industry}</span>
@@ -154,7 +154,7 @@ export const BrowseStartups = () => {
                     </div>
                   </div>
                   <Link
-                    to={`/startups/${startup.id}`}
+                    href={`/startups/${startup.id}`}
                     className="w-full text-center bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-750 text-slate-750 dark:text-slate-100 py-2 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1"
                   >
                     <span>Explore Pitch & Roles</span>

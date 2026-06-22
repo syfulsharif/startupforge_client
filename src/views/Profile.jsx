@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useApp } from "../context/AppContext";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ShieldCheck, Code, BookOpen, Crown, ChevronRight } from "lucide-react";
 export const Profile = () => {
   const { currentUser, updateProfileCV } = useApp();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(currentUser ? currentUser.name : "");
   const [userBio, setUserBio] = useState(currentUser ? currentUser.bio : "");
@@ -21,7 +21,7 @@ export const Profile = () => {
     const formData = new FormData();
     formData.append("image", file);
     try {
-      const imgbbKey = import.meta.env.VITE_IMGBB_API_KEY || '40fc352c6909e2cee7457e65b91131f8';
+      const imgbbKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || process.env.VITE_IMGBB_API_KEY || '40fc352c6909e2cee7457e65b91131f8';
       const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
         method: "POST",
         body: formData,
@@ -48,7 +48,7 @@ export const Profile = () => {
       <ShieldCheck className="w-16 h-16 text-indigo-500 dark:text-indigo-400 mb-4" />
       <h2 className="font-display font-bold text-xl">Access Privately Guarded</h2>
       <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">Log in or select an active user profile to configure your identity page.</p>
-      <button onClick={() => navigate("/login")} className="mt-5 bg-primary text-white py-2 px-5 rounded-lg text-xs font-semibold">Login</button>
+      <button onClick={() => router.push("/login")} className="mt-5 bg-primary text-white py-2 px-5 rounded-lg text-xs font-semibold">Login</button>
     </div>;
   }
   const handleUpdateProfile = async (e) => {
@@ -263,7 +263,7 @@ export const Profile = () => {
                   </span>
                   {currentUser.role === "founder" && !currentUser.isPremium && (
                     <button
-                      onClick={() => navigate("/payment")}
+                      onClick={() => router.push("/payment")}
                       className="bg-amber-500 hover:bg-amber-600 text-white text-[10px] px-2 py-0.5 rounded font-bold transition"
                     >
                       Upgrade
@@ -283,7 +283,7 @@ export const Profile = () => {
               Configure startups, view open opportunities from co-founders, or track application statuses inside your role-tailored workspace dashboard.
             </p>
             <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => router.push("/dashboard")}
               className="w-full text-center bg-indigo-500/10 hover:bg-indigo-500 text-indigo-400 hover:text-white border border-indigo-500/20 py-2 rounded-lg text-xxs font-bold transition cursor-pointer flex items-center justify-center gap-0.5"
             >
               <span>Enter Workspace</span>

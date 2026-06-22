@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useApp } from "../context/AppContext";
 import {
   Sparkles,
@@ -16,7 +17,7 @@ import {
 import { motion } from "motion/react";
 export const Home = () => {
   const { startups, opportunities, currentUser } = useApp();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const featuredStartups = startups.filter((s) => s.status === "approved").slice(0, 3);
   const featuredOpportunities = opportunities.slice(0, 3);
@@ -114,14 +115,14 @@ export const Home = () => {
         className="mt-10 flex flex-wrap justify-center gap-4"
       >
         <Link
-          to="/opportunities"
+          href="/opportunities"
           className="bg-primary hover:bg-primary/95 text-white font-medium py-3.5 px-6 rounded-lg flex items-center gap-2 shadow-lg shadow-primary/25 cursor-pointer transform hover:-translate-y-0.5 transition-all"
         >
           <span>Explore Opportunities</span>
           <ArrowRight size={16} />
         </Link>
         <Link
-          to="/startups"
+          href="/startups"
           className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:bg-slate-200 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white font-medium py-3.5 px-6 rounded-lg transition-all"
         >
           Browse Startups
@@ -142,8 +143,8 @@ export const Home = () => {
           <span className="w-3 h-3 rounded-full bg-amber-500/80" />
           <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
         </div>
-        <div className="border-b border-slate-200 dark:border-slate-800/80 pb-3 mb-4 mt-1 flex justify-center text-xs text-slate-200 font-mono">
-          On Boardng Oppotunities
+        <div className="border-b border-slate-200 dark:border-slate-800/80 pb-3 mb-4 mt-1 flex justify-center text-xs text-slate-550 dark:text-slate-400 font-mono">
+          Onboarding Opportunities
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
           <div className="bg-white/80 dark:bg-slate-950/80 p-4 rounded-xl border border-slate-200 dark:border-slate-850">
@@ -206,7 +207,7 @@ export const Home = () => {
           <span className="text-xs font-bold font-mono uppercase tracking-widest text-primary">Discover Builders</span>
           <h2 className="font-display font-extrabold text-3xl text-slate-900 dark:text-white mt-1">Featured Startups</h2>
         </div>
-        <Link to="/startups" className="text-sm font-semibold text-secondary hover:underline flex items-center gap-1">
+        <Link href="/startups" className="text-sm font-semibold text-secondary hover:underline flex items-center gap-1">
           <span>Browse All Startups</span>
           <ArrowRight size={14} />
         </Link>
@@ -246,7 +247,7 @@ export const Home = () => {
             </div>
           </div>
           <Link
-            to={`/startups/${startup.id}`}
+            href={`/startups/${startup.id}`}
             className="mt-5 text-center bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white py-2 px-4 rounded-lg text-xs font-semibold transition"
           >
             View Details
@@ -265,7 +266,7 @@ export const Home = () => {
             <span className="text-xs font-bold font-mono uppercase tracking-widest text-secondary">Apply Now</span>
             <h2 className="font-display font-extrabold text-3xl text-slate-900 dark:text-white mt-1">Featured Opportunities</h2>
           </div>
-          <Link to="/opportunities" className="text-sm font-semibold text-secondary hover:underline flex items-center gap-1">
+          <Link href="/opportunities" className="text-sm font-semibold text-secondary hover:underline flex items-center gap-1">
             <span>Explore Roles</span>
             <ArrowRight size={14} />
           </Link>
@@ -287,7 +288,7 @@ export const Home = () => {
                 {opp.title}
               </h3>
               <p className="text-xs text-slate-650 dark:text-slate-400 mt-1 hover:underline">
-                <Link to={`/startups/${opp.startupId}`}>{opp.startupName}</Link>
+                <Link href={`/startups/${opp.startupId}`}>{opp.startupName}</Link>
               </p>
 
               {
@@ -306,7 +307,7 @@ export const Home = () => {
                 <p className="text-xs text-slate-900 dark:text-white font-medium">{opp.commitment}</p>
               </div>
               <Link
-                to={`/opportunities/${opp.id}`}
+                href={`/opportunities/${opp.id}`}
                 className="bg-primary hover:bg-primary/95 text-white py-2 px-3.5 rounded-lg text-xs font-semibold transition cursor-pointer"
               >
                 Apply Now
@@ -430,7 +431,7 @@ export const Home = () => {
         Become a premium member to secure fast validation checks and priority listings.
       </p>
       <Link
-        to="/payment"
+        href="/payment"
         className="mt-6 inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:brightness-110 text-slate-950 font-bold py-3 px-6 rounded-lg text-xs"
       >
         <Flame size={14} className="fill-slate-950" />
