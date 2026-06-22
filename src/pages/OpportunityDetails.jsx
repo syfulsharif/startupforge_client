@@ -65,7 +65,7 @@ export const OpportunityDetails = () => {
       }
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-900 mb-8 group cursor-pointer"
+        className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white mb-8 group cursor-pointer"
       >
         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
         <span>Back to browser feed</span>
@@ -221,7 +221,7 @@ export const OpportunityDetails = () => {
             setShowApplyModal(false);
             setSuccessApply(false);
           }}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 dark:hover:text-slate-900"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 dark:hover:text-white"
         >
           ✕
         </button>

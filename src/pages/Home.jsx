@@ -122,7 +122,7 @@ export const Home = () => {
         </Link>
         <Link
           to="/startups"
-          className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:bg-slate-200 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-slate-900 font-medium py-3.5 px-6 rounded-lg transition-all"
+          className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:bg-slate-200 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white font-medium py-3.5 px-6 rounded-lg transition-all"
         >
           Browse Startups
         </Link>
@@ -247,7 +247,7 @@ export const Home = () => {
           </div>
           <Link
             to={`/startups/${startup.id}`}
-            className="mt-5 text-center bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-slate-900 py-2 px-4 rounded-lg text-xs font-semibold transition"
+            className="mt-5 text-center bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white py-2 px-4 rounded-lg text-xs font-semibold transition"
           >
             View Details
           </Link>

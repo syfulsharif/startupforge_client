@@ -124,7 +124,7 @@ export const Navbar = () => {
   const notifications = getNotifications();
 
   const activeLink = (path) => {
-    return location.pathname === path ? "text-primary dark:text-secondary font-semibold" : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-slate-900 transition-colors";
+    return location.pathname === path ? "text-primary dark:text-secondary font-semibold" : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors";
   };
   const handleLogout = () => {
     logout();
@@ -274,13 +274,13 @@ export const Navbar = () => {
 
                 <button
     onClick={handleLogout}
-    className="p-2 text-slate-400 hover:text-rose-500 dark:hover:text-slate-900 rounded-lg transition-colors cursor-pointer"
+    className="p-2 text-slate-400 hover:text-rose-500 dark:hover:text-white rounded-lg transition-colors cursor-pointer"
     title="Logout"
   >
                   <LogOut className="w-5 h-5" />
                 </button>
               </div> : <div className="flex items-center gap-3">
-                <Link to="/login" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-slate-900 py-2 px-3 transition-colors">
+                <Link to="/login" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white py-2 px-3 transition-colors">
                   Login
                 </Link>
                 <Link to="/register" className="bg-primary hover:bg-primary/95 text-white text-sm font-medium py-2 px-4 rounded-lg shadow-md hover:shadow-primary/20 transition-all">
